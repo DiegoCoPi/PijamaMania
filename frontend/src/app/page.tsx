@@ -1,6 +1,25 @@
 import Image from "next/image";
+import Menu_Bar from "../menu_bar/menu_bar"
 
-export default function Home() {
+export default function Init(){
+    return(
+      <>
+        <div className="text-center mt-10">
+          <h1 className="title">PijamaMania</h1>
+        </div>
+        <div className="text-left m-10 mt-20">
+          <p>
+            Bienvenido a PijamaMania un lugar en donde tus sueños en cada noche se vuelve, fantasia, comodidad y carisma con nuestras
+            pijamas que estan pensadas en todo el mundo desde los tiernos y consetidos bebes, pasando por los niños y niñas, adolecentes
+            hasta los más grandes adultos, ademas de tener tématicas de tus serias, dibujos animados y todo con los equipos del fútbol
+            Colombiano e internaciónal. A continuación mostraremos algunos ejemplares.
+          </p>
+        </div>
+        <div><Menu_Bar/></div>  
+      </>
+    )
+}
+/*export default function Home() {
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
@@ -100,4 +119,4 @@ export default function Home() {
       </footer>
     </div>
   );
-}
+}*/
