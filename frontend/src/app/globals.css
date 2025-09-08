@@ -23,11 +23,11 @@
     -webkit-text-stroke: 2px purple;
     background-clip: text;
     color: transparent;
-    font-family: 'Leckerli One', cursive;
   }
   .hover{
     @apply hover:bg-[rgba(255,215,0,1)] hover:text-purple-900 px-4 py-2 rounded transition duration-300;
   }
+
 }
 
 /* Estilo global para el fondo del body */
@@ -45,5 +45,4 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100%;
-  font-family: 'Leckerli One', cursive
 }

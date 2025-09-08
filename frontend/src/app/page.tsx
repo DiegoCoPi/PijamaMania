@@ -1,11 +1,12 @@
 import Image from "next/image";
-import Menu_Bar from "../menu_bar/menu_bar"
+import Menu_Bar from "@/menu_bar/menu_bar"
+import Init_Cards from "@/init_cards/init_cards";
 
 export default function Init(){
     return(
       <>
         <div className="text-center mt-10">
-          <h1 className="title">PijamaMania</h1>
+          <h1 className="title font-leckerli">PijamaMania</h1>
         </div>
         <div className="text-left m-10 mt-20">
           <p>
@@ -16,6 +17,12 @@ export default function Init(){
           </p>
         </div>
         <div><Menu_Bar/></div>  
+        <div className="text-center mt-10">
+          <h2 className="title font-leckerli">Nuestro Catalogo</h2>
+        </div>
+        <div>
+          <Init_Cards/>
+        </div>
       </>
     )
 }
