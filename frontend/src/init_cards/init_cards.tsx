@@ -6,7 +6,7 @@ function Init_Cards(){
     const Cards_Content:Cards_Interface[]=[
         {img:"/pijamas/Pijama_Simpson.jpg",name:"Los Simpsons",price:45500, size:"L", stock:20},
         {img:"/pijamas/Pijama_Mickey_Mouse.jpg",name:"Mickey Mouse",price:45550, size:"M", stock:15},
-        {img:"",name:"",price:45550, size:"XL", stock:5},
+        {img:"/pijamas/Pijama_Barcelona.jpg",name:"F.C.Barcelona",price:45550, size:"XL", stock:5},
     ]
     
     return(
@@ -26,7 +26,15 @@ function Init_Cards(){
                         <div className="text-aling text-center">
                             <p><strong>Cantidad:</strong></p>
                             <div>
+                                <img src="/signs/Signo_mas.png" 
+                                     alt="Signo más" width={24} height={24}
+                                     className="bg-[rgba(255,215,0,1)]"
+                                />
                                 <p>{card.stock}</p>
+                                <img src="/signs/Signo_menos.png" 
+                                     alt="Signo menos" width={24} height={24}
+                                     className="bg-[rgba(255,215,0,1)]"
+                                />
                             </div>
                         </div>
                     </div>
