@@ -3,5 +3,5 @@ export interface Cards_Interface{
     name:string;
     price:number;
     size:string;
-    quantity:number;
+    stock:number;
 }

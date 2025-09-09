@@ -4,9 +4,9 @@ import {Cards_Interface} from "./cards_interface"
 function Init_Cards(){
     
     const Cards_Content:Cards_Interface[]=[
-        {img:"/images/Pijama_Simpson.jpg",name:"Pijama Los Simpsons",price:45500, size:"L", quantity:20},
-        {img:"",name:"Pijama 2",price:45550, size:"M", quantity:15},
-        {img:"",name:"Pijama 3",price:45550, size:"XL", quantity:5},
+        {img:"/pijamas/Pijama_Simpson.jpg",name:"Los Simpsons",price:45500, size:"L", stock:20},
+        {img:"/pijamas/Pijama_Mickey_Mouse.jpg",name:"Mickey Mouse",price:45550, size:"M", stock:15},
+        {img:"",name:"",price:45550, size:"XL", stock:5},
     ]
     
     return(
@@ -17,13 +17,18 @@ function Init_Cards(){
                      hover:scale-105 transition-transform">
                     <img src={card.img} alt={card.name} className="w-full h-40 object-cover rounded-md"/>
                     <h2>{card.name}</h2>
-                    <h3>Precio:${card.price}</h3>
+                    <h3>Precio: ${card.price}</h3>
                     <div>
                         <p>Tallas:</p>
                         <div></div>
                         <br/>
-                        <p>Cantidad:</p>
-                        <div></div>
+                        
+                        <div className="text-aling text-center">
+                            <p><strong>Cantidad:</strong></p>
+                            <div>
+                                <p>{card.stock}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             ))}
