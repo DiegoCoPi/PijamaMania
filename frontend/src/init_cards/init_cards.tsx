@@ -54,8 +54,36 @@ function Init_Cards(){
                         <h2><strong>{card.name}</strong></h2>
                         <h3><strong>Talla:</strong></h3>
                         <h3><strong>Precio: $</strong>{card.price}</h3>
-                        <h3><strong>Cantidad:</strong>{card.quantity}</h3>
+                        <div className="flex justify-left space-x-4">
+                            <h3><strong>Cantidad:</strong></h3>
+                            <div className="flex justify-center space-x-4">
+                            <button onClick={()=>incrementClick(index)}>
+                                <Image
+                                    src="/signs/signo_mas.png"
+                                    alt="signo_mas"
+                                    height={20}
+                                    width={20}
+                                    className="bg-[rgba(255,215,0,1)]"
+                                />
+                            </button>
+                            <h3 className="bg-purple-900"><strong>{card.quantity}</strong></h3>
+                            <button onClick={()=>decrementClick(index)}>
+                                <Image
+                                    src="/signs/signo_menos.png"
+                                    alt="signo_menos"
+                                    height={20}
+                                    width={20}
+                                    className="bg-[rgba(255,215,0,1)]"
+                                />
+                            </button>
+                            </div>
+                        </div>
+                        <br/>
+                        <div>
+                            <Buy_Button/>
+                        </div>
                     </div>
+                    
                 ))}
             </div>
             
