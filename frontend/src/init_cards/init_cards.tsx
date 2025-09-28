@@ -1,6 +1,8 @@
 "use client"
+import Image from "next/image";
 import {Cards_Interface} from "./cards_interface"
 import {useState} from "react"
+import Buy_Button from "@/buttons/button_buy"
 
 function Init_Cards(){
     
@@ -30,46 +32,35 @@ function Init_Cards(){
     
     
     return(
-        <div className="flex justify-center space-x-20 p-10">
-            {cards.map((card, index)=>(
-                <div key={index}  className="p-4 rounded-xl shadow-md border border-yellow-400 text-yellow-400 
-                     bg-[linear-gradient(180deg,rgba(250,38,160,1)_41%,rgba(33,42,255,1)_82%)] 
-                     hover:scale-105 transition-transform">
-                    <img src={card.img} alt={card.name} className="w-full h-40 object-cover rounded-md"/>
-                    <h2>{card.name}</h2>
-                    <h3>Precio: ${card.price}</h3>
-                    <div>
-                        <p>Tallas:</p>
-                        <div></div>
+        <div>
+            {/*<div className="m-24">
+                <Image
+                    src="/signs/izquierda.png"
+                    alt="flecha_izquierda"
+                    height={50}
+                    width={50}
+                />
+            </div>*/}
+            <div className="flex justify-center space-x-20">
+                {cards.map((card,index)=>(
+                    <div key={index} className="p-4 rounded-xl text-yellow-400 bg-[linear-gradient(180deg,rgba(250,38,160,1)_41%,rgba(33,42,255,1)_82%)]">
+                        <Image
+                            src={card.img}
+                            alt={card.name}
+                            height={200}
+                            width={200}
+                        />
                         <br/>
-                        
-                        <div className="flex justify-center space-x-3">
-                            <p><strong>Cantidad:</strong></p>
-                            <br/>
-                            <div className="flex justify-center space-x-4">
-                                <button onClick={()=>incrementClick(index)} className="rouded-lg">
-                                    <img 
-                                        src="/signs/Signo_mas.png" 
-                                        alt="Signo más" width={24} height={24}
-                                        className="bg-[rgba(255,215,0,1)]"
-                                    />
-                                </button>
-                                <p>{card.quantity}</p>
-                                <button onClick={()=>decrementClick(index)} className="rounded-lg">
-                                    <img src="/signs/Signo_menos.png" 
-                                        alt="Signo menos" width={24} height={24}
-                                        className="bg-[rgba(255,215,0,1)]"
-                                    />
-                                </button>
-                            </div>
-                        </div>
+                        <h2><strong>{card.name}</strong></h2>
+                        <h3><strong>Talla:</strong></h3>
+                        <h3><strong>Precio: $</strong>{card.price}</h3>
+                        <h3><strong>Cantidad:</strong>{card.quantity}</h3>
                     </div>
-                    <div>
-                        {/*Buy_Button */}
-                    </div>
-                </div>
-            ))}
+                ))}
+            </div>
+            
         </div>
+            
     )
 }
 

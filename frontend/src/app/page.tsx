@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import Menu_Bar from "@/menu_bar/menu_bar"
 import Init_Cards from "@/init_cards/init_cards";
 
