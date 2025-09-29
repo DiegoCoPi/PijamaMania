@@ -3,6 +3,7 @@ import Image from "next/image";
 import {Cards_Interface} from "./cards_interface"
 import {useState} from "react"
 import Buy_Button from "@/buttons/button_buy"
+import Size_Buttons from "@/sizes/size"
 
 function Init_Cards(){
     
@@ -52,11 +53,11 @@ function Init_Cards(){
                         />
                         <br/>
                         <h2><strong>{card.name}</strong></h2>
-                        <h3><strong>Talla:</strong></h3>
+                        <h3><strong>Talla:</strong><Size_Buttons/></h3>
                         <h3><strong>Precio: $</strong>{card.price}</h3>
-                        <div className="flex justify-left space-x-4">
+                        <div className="flex justify-left space-x-2">
                             <h3><strong>Cantidad:</strong></h3>
-                            <div className="flex justify-center space-x-4">
+                            <div className="flex justify-center space-x-1">
                             <button onClick={()=>incrementClick(index)}>
                                 <Image
                                     src="/signs/signo_mas.png"
@@ -66,7 +67,7 @@ function Init_Cards(){
                                     className="bg-[rgba(255,215,0,1)]"
                                 />
                             </button>
-                            <h3 className="bg-purple-900"><strong>{card.quantity}</strong></h3>
+                            <h3 className=" bg-purple-900"><strong>{card.quantity}</strong></h3>
                             <button onClick={()=>decrementClick(index)}>
                                 <Image
                                     src="/signs/signo_menos.png"
