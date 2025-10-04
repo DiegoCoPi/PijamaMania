@@ -20,6 +20,8 @@ export default function Init(){
         <div className="text-center mt-10">
           <h2 className="title font-leckerli">Nuestro Catalogo</h2>
         </div>
+        <br/>
+        <br/>
         <div>
           <Init_Cards/>
         </div>
