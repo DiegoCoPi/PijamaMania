@@ -1,6 +1,7 @@
 
 import Menu_Bar from "@/menu_bar/menu_bar"
 import Init_Cards from "@/init_cards/init_cards";
+import Footer from "@/footer/footer";
 
 export default function Init(){
     return(
@@ -24,6 +25,9 @@ export default function Init(){
         <br/>
         <div>
           <Init_Cards/>
+        </div>
+        <div>
+          <Footer/>
         </div>
       </>
     )
