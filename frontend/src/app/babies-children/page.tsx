@@ -1,5 +1,9 @@
+'use client'
 import { Cards_Interface } from "@/init_cards/cards_interface"
+import Menu_Bar from "@/menu_bar/menu_bar"
 import { useState } from "react"
+import Footer from "@/footer/footer"
+import Image from "next/image"
 
 const BabiesChildren= ()=>{
     const [cardBC, setCardBC]=useState<Cards_Interface[]>([
@@ -38,7 +42,32 @@ const BabiesChildren= ()=>{
 
     return(
         <div>
+            <h1 className="title font-leckerli mt-8">Bebes y Niños</h1>
+            <div>
+                <Menu_Bar/>
+            </div>
+            <br/>
+            <p className="paragraph flex text-left text-lg m-6">
+               En esta sección puede encontrar toda la comodidad, fantasia y ensueño en nuestras pijamas y cobijas
+               para que tu bebe tenga la mejor experiencia en cada sueño desde la comodidad de una prenda hasta el
+               anhelo de verse en la piel de tu personaje favorito.
+            </p>
+            {/*Tarjetas de compras*/}
+            <div>
+                {cardBC.map((card,index)=>(
+                    <div key={index}>
+                        <Image
+                            src={card.img}
+                            alt={card.name}
+                            height={50}
+                            width={50}
+                        />
+                    </div>
+                ))}
+            </div>
+            <Footer/>
         </div>
+        
     )
 }
 export default BabiesChildren
