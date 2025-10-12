@@ -10,6 +10,9 @@ function Init_Cards() {
         { img: "/pijamas/Pijama_Simpson.jpg", name: "Los Simpsons", price: 45500, size: "L", quantity: 0 },
         { img: "/pijamas/Pijama_Mickey_Mouse.jpg", name: "Mickey Mouse", price: 45550, size: "M", quantity: 0 },
         { img: "/pijamas/Pijama_Barcelona.jpg", name: "F.C.Barcelona", price: 45550, size: "XL", quantity: 0 },
+        { img: "/pijamas/Pijama_Simpson.jpg", name: "Los Simpsons", price: 45500, size: "L", quantity: 0 },
+        { img: "/pijamas/Pijama_Mickey_Mouse.jpg", name: "Mickey Mouse", price: 45550, size: "M", quantity: 0 },
+        { img: "/pijamas/Pijama_Barcelona.jpg", name: "F.C.Barcelona", price: 45550, size: "XL", quantity: 0 },
     ]);
 
     const [currentcards, setCurrentcards] = useState(0);
@@ -25,8 +28,8 @@ function Init_Cards() {
 
     // Incremento y decremento
     const incrementClick = (index: number) => {
-        setCards((prevCards) => {
-            const newCards = [...prevCards]
+        setCards((nextCards) => {
+            const newCards = [...nextCards]
             newCards[index].quantity += 1
             return newCards
         })
