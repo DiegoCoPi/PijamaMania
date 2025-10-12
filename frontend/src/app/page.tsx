@@ -7,11 +7,11 @@ export default function Init(){
     return(
       <>
         <div className="text-center mt-10">
-          <h1 className="title font-leckerli">PijamaMania</h1>
+          <h1 className="title font-leckerli text-9xl">PijamaMania</h1>
         </div>
-        <div className="text-left m-10 mt-20">
+        <div className="paragraph text-left m-10 mt-20 text-2xl">
           <p>
-            Bienvenido a PijamaMania un lugar en donde tus sueños en cada noche se vuelve, fantasia, comodidad y carisma con nuestras
+            ¡Bienvenido a PijamaMania! un lugar en donde tus sueños en cada noche se vuelve, fantasia, comodidad y carisma con nuestras
             pijamas que estan pensadas en todo el mundo desde los tiernos y consetidos bebes, pasando por los niños y niñas, adolecentes
             hasta los más grandes adultos, ademas de tener tématicas de tus serias, dibujos animados y todo con los equipos del fútbol
             Colombiano e internaciónal. A continuación mostraremos algunos ejemplares.
