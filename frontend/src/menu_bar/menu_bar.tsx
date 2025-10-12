@@ -8,7 +8,7 @@ function Menu_Bar(){
                 <ul className="flex space-x-20 text-[rgba(255,215,0,1)]">
                     <li><Link href="/" className="hover">Inicio</Link></li>
                     <li><Link href="/babies-children" className="hover">Bebés-niños y niñas</Link></li>
-                    <li><a href="#" className="hover">Adolescentes-Adultos</a></li>
+                    <li><a href="/teenegers-adults" className="hover">Adolescentes-Adultos</a></li>
                 </ul>
             </div>
         </nav>
