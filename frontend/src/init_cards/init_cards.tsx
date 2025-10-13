@@ -7,12 +7,12 @@ import Size_Buttons from "@/sizes/size"
 
 function Init_Cards() {
     const [cards, setCards] = useState<Cards_Interface[]>([
-        { img: "/pijamas/Pijama_Simpson.jpg", name: "Los Simpsons", price: 45500, size: "L", quantity: 0 },
-        { img: "/pijamas/Pijama_Mickey_Mouse.jpg", name: "Mickey Mouse", price: 45550, size: "M", quantity: 0 },
-        { img: "/pijamas/Pijama_Barcelona.jpg", name: "F.C.Barcelona", price: 45550, size: "XL", quantity: 0 },
-        { img: "/pijamas/Pijama_Simpson.jpg", name: "Los Simpsons", price: 45500, size: "L", quantity: 0 },
-        { img: "/pijamas/Pijama_Mickey_Mouse.jpg", name: "Mickey Mouse", price: 45550, size: "M", quantity: 0 },
-        { img: "/pijamas/Pijama_Barcelona.jpg", name: "F.C.Barcelona", price: 45550, size: "XL", quantity: 0 },
+        {img:"/pijamas/adults/Los_Simpsons.jpg", name: "Los Simpsons", price: 45500, stock:50,quantity: 0 },
+        {img:"/pijamas/babies/Elmo.jpg", name: "Elmo", price:47000, stock:50,quantity:0},
+        {img:"/pijamas/children/Cerditos.jpg", name: "Cerditos", price:47000, stock:50,quantity:0},
+        {img:"/pijamas/children/Mickey_Mouse.jpg", name: "Mickey Mouse",price:45800,stock:50,quantity:0},
+        {img:"/pijamas/adults/Messi_Inter_Mia.jpg", name: "Messi Inter Mia", price:47000, stock:50,quantity:0},
+        {img:"/pijamas/babies/Harry_Potter.jpg", name: "Harri Potter", price:47000, stock:50,quantity:0},
     ]);
 
     const [currentcards, setCurrentcards] = useState(0);
@@ -91,7 +91,7 @@ function Init_Cards() {
                                                     className="bg-[rgba(255,215,0,1)]"
                                                 />
                                             </button>
-                                            <h3 className="px-2 bg-purple-900 text-white rounded"><strong>{card.quantity}</strong></h3>
+                                            <h3 className="px-2 bg-purple-900 text-[rgba(255,215,0,1)] rounded"><strong>{card.quantity}</strong></h3>
                                             <button onClick={() => decrementClick(index)}>
                                                 <Image
                                                     src="/signs/signo_menos.png"
@@ -103,6 +103,7 @@ function Init_Cards() {
                                             </button>
                                         </div>
                                     </div>
+                                    <br/>
                                     <div className="mt-2">
                                         <Buy_Button />
                                     </div>
