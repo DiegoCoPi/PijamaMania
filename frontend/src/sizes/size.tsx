@@ -1,31 +1,27 @@
-import {useState} from "react"
+import { useState } from "react";
 
+const Size_Buttons = () => {
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
-const Size_Buttons=() => {
-    return(
-        <div className="flex text-center space-x-4">
-            <div className="bg-[rgba(255,215,0,1)] text-purple-900 p-2 rounded-full h-6 w-6 flex items-center justify-center
-                            hover:bg-purple-900 hover:text-[rgba(255,215,0,1)] transition-colors duration-300 ">
+  const clickSize = (size: string) => {
+    setSelectedSize((prev) => (prev === size ? null : size));
+  };
+
+  const sizes = ["S", "M", "L", "XL"];
+
+  return (
+    <div className="flex text-center space-x-4 cursor-pointer">
+        {sizes.map((size)=>(
+            <div key={size} className={`rounded-full h-8 w-8 flex items-center justify-center transition-colors duration-300
+                ${selectedSize === size? "bg-purple-900 text-[rgba(255,215,0,1)]": "bg-[rgba(255,215,0,1)] text-purple-900"} 
+                hover:bg-purple-900 hover:text-[rgba(255,215,0,1)]`} onClick={() => clickSize(size)}>
                 <button>
-                    <p><strong>S</strong></p>
+                    <p><strong>{size}</strong></p>
                 </button>
             </div>
-            <br/>
-            <div className="bg-[rgba(255,215,0,1)] text-purple-900 p-2 rounded-full h-6 w-6 flex items-center justify-center
-                            hover:bg-purple-900 hover:text-[rgba(255,215,0,1)] transition-colors duration-300 ">
-                <button>
-                    <p><strong>M</strong></p>
-                </button>
-            </div>
-            <br/>
-            <div className="bg-[rgba(255,215,0,1)] text-purple-900 p-2 rounded-full h-6 w-6 flex items-center justify-center
-                            hover:bg-purple-900 hover:text-[rgba(255,215,0,1)] transition-colors duration-300 ">
-                <button>
-                    <p><strong>L</strong></p>
-                </button>
-            </div>
-        </div>
-    )
-}
+        ))}
+    </div>
+  );
+};
 
-export default Size_Buttons
+export default Size_Buttons;
