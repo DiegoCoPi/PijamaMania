@@ -5,14 +5,15 @@ import { useState } from "react"
 import Buy_Button from "@/buttons/button_buy"
 import Size_Buttons from "@/sizes/size"
 
-function Init_Cards() {
+function Cards_Babies_Children() {
     const [cards, setCards] = useState<Cards_Interface[]>([
-        {img:"/pijamas/adults/Los_Simpsons.jpg", name: "Los Simpsons", price: 45500, stock:50,quantity: 0 },
-        {img:"/pijamas/babies/Elmo.jpg", name: "Elmo", price:47000, stock:50,quantity:0},
         {img:"/pijamas/children/Cerditos.jpg", name: "Cerditos", price:47000, stock:50,quantity:0},
         {img:"/pijamas/children/Mickey_Mouse.jpg", name: "Mickey Mouse",price:45800,stock:50,quantity:0},
-        {img:"/pijamas/adults/Messi_Inter_Mia.jpg", name: "Messi Inter Mia", price:47000, stock:50,quantity:0},
-        {img:"/pijamas/babies/Harry_Potter.jpg", name: "Harri Potter", price:47000, stock:50,quantity:0},
+        {img:"/pijamas/children/Grinch.webp", name: "Grinch",price:45800,stock:50,quantity:0},
+        {img:"/pijamas/children/Intensamente.jpg", name: "Intensamente",price:45800,stock:50,quantity:0},
+        {img:"/pijamas/children/Mario_Bros.jpg", name: "Mario Bros",price:45800,stock:50,quantity:0},
+        {img:"/pijamas/children/Marvel.jpg", name: "Marvel",price:45800,stock:50,quantity:0},
+        {img:"/pijamas/children/Sonic.jpg", name: "Sonic",price:45800,stock:50,quantity:0},
     ]);
 
     const [currentcards, setCurrentcards] = useState(0);
@@ -50,7 +51,7 @@ function Init_Cards() {
             <div className="flex items-center justify-between">
                 
                 {/* Botón Izquierda */}
-                <button onClick={prevCards}>
+                <button className="cursor-pointer" onClick={prevCards}>
                     <Image
                         src="/signs/izquierda.png"
                         alt="flecha_izquierda"
@@ -76,28 +77,29 @@ function Init_Cards() {
                                         width={200}
                                         className="object-cover w-full h-[200px] rounded-lg"
                                     />
-                                    <h2 className="mt-2 font-bold">{card.name}</h2>
+                                    <h2 className="mt-2 font-bold text-center text-3xl">{card.name}</h2>
                                     <h3><strong>Talla:</strong> <Size_Buttons /></h3>
                                     <h3><strong>Precio: $</strong>{card.price}</h3>
                                     <div className="flex items-center space-x-2 mt-2">
                                         <h3><strong>Cantidad:</strong></h3>
-                                        <div className="flex space-x-1 items-center">
-                                            <button onClick={() => incrementClick(index)}>
+                                        <div className="flex space-x-1 items-center hover:scale-110">
+                                            {/*Botón más*/ }
+                                            <button className="cursor-pointer" onClick={() => incrementClick(index)}>
                                                 <Image
                                                     src="/signs/signo_mas.png"
                                                     alt="signo_mas"
-                                                    height={20}
-                                                    width={20}
+                                                    height={22}
+                                                    width={22}
                                                     className="bg-[rgba(255,215,0,1)]"
                                                 />
                                             </button>
                                             <h3 className="px-2 bg-purple-900 text-[rgba(255,215,0,1)] rounded"><strong>{card.quantity}</strong></h3>
-                                            <button onClick={() => decrementClick(index)}>
+                                            <button className="cursor-pointer" onClick={() => decrementClick(index)}>
                                                 <Image
                                                     src="/signs/signo_menos.png"
                                                     alt="signo_menos"
-                                                    height={20}
-                                                    width={20}
+                                                    height={22}
+                                                    width={22}
                                                     className="bg-[rgba(255,215,0,1)]"
                                                 />
                                             </button>
@@ -114,7 +116,7 @@ function Init_Cards() {
                 </div>
 
                 {/* Botón Derecha */}
-                <button onClick={nextCards}>
+                <button className="cursor-pointer" onClick={nextCards}>
                     <Image
                         src="/signs/derecha.png"
                         alt="flecha_derecha"
@@ -127,4 +129,4 @@ function Init_Cards() {
     )
 }
 
-export default Init_Cards
+export default Cards_Babies_Children

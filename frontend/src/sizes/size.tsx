@@ -15,7 +15,7 @@ const Size_Buttons = () => {
             <div key={size} className={`rounded-full h-8 w-8 flex items-center justify-center transition-colors duration-300
                 ${selectedSize === size? "bg-purple-900 text-[rgba(255,215,0,1)]": "bg-[rgba(255,215,0,1)] text-purple-900"} 
                 hover:bg-purple-900 hover:text-[rgba(255,215,0,1)]`} onClick={() => clickSize(size)}>
-                <button>
+                <button className="cursor-pointer">
                     <p><strong>{size}</strong></p>
                 </button>
             </div>
