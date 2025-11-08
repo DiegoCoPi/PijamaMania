@@ -2,8 +2,6 @@ import { useState } from "react"
 import { Cards_Interface } from "./cards_interface"
 import Image from "next/image"
 import Size_Buttons from "@/sizes/size"
-import Buy_Button from "@/buttons/button_buy"
-import Buy_Form from "@/form/buy_borm"
 
 const Cards_Adults_Teenegers=()=>{
     
@@ -107,7 +105,6 @@ const Cards_Adults_Teenegers=()=>{
                                             </div>
                                             <br/>
                                             <div className="mt-2">
-                                                <Buy_Button />
                                             </div>
                                         </div>
                                     </div>
@@ -125,7 +122,6 @@ const Cards_Adults_Teenegers=()=>{
                             />
                         </button>
                     </div>
-                    <Buy_Form/>
                 </div>
     )
 }
