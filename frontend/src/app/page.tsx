@@ -2,6 +2,7 @@ import Menu_Bar from "@/menu_bar/menu_bar"
 import Cards_Initial from "@/cards/cards_initial"
 import Footer from "@/footer/footer";
 import Loading_gadet from "./loading";
+import Not_found from "./not-found";
 
 export default function Init(){
     return(
@@ -26,11 +27,7 @@ export default function Init(){
         <div>
           <Cards_Initial/>
         </div>
-        {/*Borrar desde aqui cuando acabemos*/}
-        <div>
-          <Loading_gadet/>
-        </div>
-        {/*Borrar hasta aqui cuando acabemos*/}
+        
         <div>
           <Footer/>
         </div>

@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*Exportar las fuentes*/
-@import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap');
-
-
 /* Clase global para títulos */
 @layer components {
   .title {
@@ -37,7 +33,6 @@
     font-weight: bold;
   }
 }
-
 /* Estilo global para el fondo del body */
 body {
   @apply m-0 min-h-screen;
@@ -54,20 +49,3 @@ body {
   background-attachment: fixed;
   background-size: 100% 100%;
 }
-
-/*Botones
-.button{
-  @apply text-center text-2xl;
-  background:linear-gradient(
-    90deg
-    rgb(163, 48, 6)20%,
-    rgb(146, 4, 190) 40%,
-    rgb(1, 24, 148)60%,
-    rgb(174, 3, 143)80%
-  );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 1px rgb(213, 6, 120);
-    background-clip: text;
-    color: transparent;
-}*/
