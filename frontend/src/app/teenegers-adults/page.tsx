@@ -23,7 +23,6 @@ const Teenegers_Adults= ()=>{
             <div>
                 <Cards_Adults_Teenegers/>
             </div>
-            <Footer/>
         </div>
     )
 }

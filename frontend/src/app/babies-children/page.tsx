@@ -26,9 +26,6 @@ const BabiesChildren= ()=>{
         <div>
             <Cards_Babies_Children/>
         </div>
-        <div>
-            <Footer/>
-        </div>
     </div>
     )
 }

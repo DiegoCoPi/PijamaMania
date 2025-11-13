@@ -38,14 +38,18 @@ export default function Form_buy(){
           {/*Aqui iniciamos con las casillas de los formulatios */}
           <br/>
           <div>
-            <div className="flex justify-center-safe">
-              <label htmlFor="name">Nombre(s):</label>
-              <input className="bg-violet-800 rounded-se-2xl text-yellow-400 pl-2" 
+            <div className="flex flex-col items-center space-y-2">
+              <div className="flex flex-row space-x-2">
+                  <label htmlFor="name" className="justify-center">Nombre(s):</label>
+                  <input className="bg-yellow-400 rounded-se-2xl text-violet-900 pl-2 w-80" 
                      id="name" name="name" type="input" placeholder="sin ñ ni tildes"/>
+              </div>
               <br/>
-              <label htmlFor="lastname">Apellido(s):</label>
-              <input className="bg-violet-800 rounded-se-2xl text-yellow-400 pl-2" 
+              <div className="flex flex-row space-x-2">
+                  <label htmlFor="lastname">Apellido(s):</label>
+                  <input className="bg-yellow-400 rounded-se-2xl text-violet-900 pl-2 w-80" 
                      id="lastname" name="lastname" type="input" placeholder="sin ñ ni tildes"/>
+              </div>
             </div>
             <br/>
             <div className="flex flex-row gap-50 justify-center">
