@@ -26,21 +26,21 @@ function notFound (){
 
     return(
        <div className="w-screen h-screen flex flex-col items-center justify-center">
-            <h1 className="text-red-500 text-9xl mt-4">
-            ERROR 404
-            </h1><br/>
-            <p className="text-red-900 text-6xl">¡UPS! Pagina no disponible</p>
+            <h1 className="text-red-600 text-8xl">ERROR 404</h1>
+            <p className="text-red-900 text-4xl">¡UPS! Pagina no disponible</p>
             <Image
             src="/img/luigi_asustado.png"
             alt="luigi"
-            width={300}
-            height={300}
-            className="transition-opacity duration-700 ease-in-out"
+            width={200}
+            height={200}
+            className="mt-6 transition-opacity duration-700 ease-in-out"
             />
-            <div>
-                {seconds > 0?(
-                    <p>Sera redirigido a la pagina de inicio en {seconds} segundos</p>
-                ):(<p>Redirigiendo...</p>)}
+            <div className="title text-4xl">
+            {seconds > 0 &&(
+                <p>Sera redirigido a la pagina de inicio en {seconds} segundos</p>        
+            )}
+            
+            
             </div>
         </div>
         
