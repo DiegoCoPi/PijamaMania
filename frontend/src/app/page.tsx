@@ -8,13 +8,15 @@ function Initial (){
             <div className="title text-9xl mt-8">
                 <h1>PIJAMAMANIA</h1>
             </div>
+            <br/>
             <Menu_Bar/>
             <br/>
             <div className="ml-20 mr-20 mt-5 mb-5">
                 <p className="paragraph text-3xl">
-                    ¡Bienvenidos a Pijamamania un lugar en donde tus mayores fantasias y sueño se transforma
-                    en un traje comodo, liviano y llmativo para llevarlo contigo cada noche al dormir e inclusivo
-                    en tus sueños
+                    ¡Bienvenidos a Pijamamania, un lugar donde tus mayores fantasías y sueños se transforman 
+                    en un traje cómodo, liviano y llamativo. Diseños pensados para acompañarte cada noche al 
+                    dormir e incluso en tus sueños, para que vivas la magia desde el momento en que te pones tu
+                    pijama favorita.
                 </p>
             </div>
             <br/>

@@ -11,7 +11,9 @@ const BabiesChildren= ()=>{
         <div className="text-center mt-8">
             <h1 className="title text-7xl">Bebes-niños y niñas</h1>
         </div>
-       
+        <br/>
+        <Menu_Bar/>
+        <br/>
         <div>
             <p className="paragraph m-10 text-2xl">
                 ¡Haz que cada noche sea una aventura! 🌙✨
@@ -22,7 +24,6 @@ const BabiesChildren= ()=>{
                 Explora nuestra colección o usa el buscador si ya tienes algo especial en mente. 💫
             </p>
         </div>
-        <div><Menu_Bar/></div>
         <div>
             <Cards_Babies_Children/>
         </div>
