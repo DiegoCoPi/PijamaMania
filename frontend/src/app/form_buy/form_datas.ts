@@ -1,4 +1,6 @@
 export interface Data_Form{
     name:string,
-    lastanme:string
+    lastname:string;
+    phone:number;
+    quantity:number;
 }

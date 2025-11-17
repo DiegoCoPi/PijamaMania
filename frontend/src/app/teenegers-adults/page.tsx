@@ -10,15 +10,18 @@ const Teenegers_Adults= ()=>{
             <div className="text-center title text-7xl mt-10">
                 <h1>Adolecentes y adultos</h1>  
             </div>
+            <br/>
+            <Menu_Bar/>
+            <br/>
             <div className="paragraph m-10 text-2xl">
                 <p>
-                    En esta sección esta dedicada para los mas grandes y mayores en donde su expesión y estilo pueden reflejarse
-                    en un traje comodo en cada sueño, ya que los diseños son más realistas y sirve para compartir en familia
+                    En esta sección encontrarás pijamas pensados especialmente para adultos y adolescentes, donde el
+                    estilo y la personalidad se reflejan en cada diseño. Aquí combinamos comodidad, calidad y un toque
+                    más realista en los estampados, perfectos para disfrutar noches de descanso o compartir momentos 
+                    especiales en familia. Cada prenda está creada para que expreses tu esencia sin perder suavidad, 
+                    confort y libertad al dormir.
                 </p>
             </div>    
-            <div>
-                <Menu_Bar/>
-            </div>
             <br/>
             <div>
                 <Cards_Adults_Teenegers/>
