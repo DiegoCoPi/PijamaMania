@@ -70,7 +70,7 @@ export default function Form_buy(){
                   <label htmlFor="name" className="justify-center text-3xl text-amber-300">Nombre(s):</label>
                   <input 
                     className={`bg-yellow-400 rounded-se-2xl text-violet-900 pl-2 w-80
-                              ${errors.name ? "border-4 border-red-600" : "border-2 border-transparent"}`}
+                              ${errors.name ? "border-4 border-red-600" : "border-transparent"}`}
                     id="name" 
                     name="name"   
                     type="input " 
@@ -87,7 +87,8 @@ export default function Form_buy(){
               <div className="flex flex-row space-x-2">
                   <label htmlFor="lastname" className="justify-center text-3xl text-amber-300">Apellido(s):</label>
                   <input 
-                    className="bg-yellow-400 rounded-se-2xl text-violet-900 pl-2 w-80" 
+                    className={`bg-yellow-400 rounded-se-2xl text-violet-900 pl-2 w-80
+                              ${errors.lastname? "border-4 border-red-500":"border-transparent"}`} 
                     id="lastname" 
                     name="lastname" 
                     type="input" 
@@ -103,30 +104,44 @@ export default function Form_buy(){
               <div className="flex flex-row space-x-2">
                   <label htmlFor="phone" className="justify-center text-3xl text-amber-300">Telefóno:</label>
                   <input 
-                    className="bg-yellow-400 rounded-se-2xl text-violet-900 pl-2 w-80"
+                    className={`bg-yellow-400 rounded-se-2xl text-violet-900 pl-2 w-80
+                              ${errors.phone? "border-4 border-red-500":"border-transparent"}`}
                     id="phone" 
                     name="phone" 
                     type="input" 
-                    placeholder="sin espacios"
+                    placeholder="sin espacios y solo digite números"
                     value={phone}
                     onChange={(e)=>{setPhone(e.target.value)}}
                     />
               </div>
+              {errors.phone && (
+                <p className="text-yellow-500">¡Diligencie esta casilla, por favor!</p>
+              )}
               <br/>
+              {/*Separación Horizontal */}
               <div>
-                  <label htmlFor="quantity" className="justify-center text-3xl text-amber-300">Cantidad: </label>
-                  <input 
-                    className="bg-yellow-400 rounded-se-2xl text-violet-900 pl-2 w-80"
-                    id="quantity" 
-                    name="quantity" 
+                <div className="flex flex-row space-x-2">
+                    <label htmlFor="quantity" className="justify-center text-3xl text-amber-300">Cantidad: </label>
+                    <input className={`bg-yellow-400 rounded-2xl text-violet-900 pl-2 w-20
+                                    ${errors.quantity?"border-4 border-red-500":"border-transparent"}`}
+                    id="quantity"
+                    name="quantity"
                     type="input"
-                    value={quantity} 
-                    placeholder="sin espacios"
+                    placeholder="0"
+                    value={quantity}
                     onChange={(e)=>{setQuantity(e.target.value)}}
                     />
+                </div>
+                {errors.quantity &&(
+                  <p className="text-yellow-500">¡Diligencie esta casilla, por favor!</p>
+                )}
+                <div>
+
+                </div>
               </div>
             </div>
             <br/>
+            {/*Aqui los botones del formulario*/}
             <div className="flex flex-row gap-50 justify-center">
               <button 
               type="button"
