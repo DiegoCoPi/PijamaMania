@@ -10,6 +10,7 @@ export default function Form_buy(){
   const [lastname, setLastname]= useState("")
   const [phone, setPhone]=useState("")
   const [quantity, setQuantity]=useState("")
+  const [products, setProducts]=useState("")
   const [errors, setError]=useState("")
 
   const [showModal, setShowModal] = useState(false)
@@ -119,7 +120,7 @@ export default function Form_buy(){
               )}
               <br/>
               {/*Separación Horizontal */}
-              <div>
+              <div className="flex flex-row space-x-4">
                 <div className="flex flex-row space-x-2">
                     <label htmlFor="quantity" className="justify-center text-3xl text-amber-300">Cantidad: </label>
                     <input className={`bg-yellow-400 rounded-2xl text-violet-900 pl-2 w-20
@@ -136,7 +137,16 @@ export default function Form_buy(){
                   <p className="text-yellow-500">¡Diligencie esta casilla, por favor!</p>
                 )}
                 <div>
-
+                    <label htmlFor="pijama_name" className="justify-center text-yellow-500 text-3xl">Producto(s): </label>
+                    <input className={`bg-yellow-400 rounded-2xl text-violet-900 pl-2 w-20
+                                    ${errors.products?"border-4 border-red-500":"border-transparent"}`}
+                    id="products"
+                    name="products"
+                    type="input"
+                    placeholder="0"
+                    value={products}
+                    onChange={(e)=>{setQuantity(e.target.value)}}
+                    />
                 </div>
               </div>
             </div>
