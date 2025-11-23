@@ -1,12 +1,25 @@
+"use client";
 import Cards_Initial from "@/cards/cards_initial"
-import Footer from "@/footer/footer"
 import Menu_Bar from "@/menu_bar/menu_bar"
+import User_Icon from "@/user_icon/user_icon"
+import { useRouter } from "next/navigation"
 
 function Initial (){
+    
+    const router = useRouter()
+    
     return(
         <div>
-            <div className="title text-9xl mt-8">
-                <h1>PIJAMAMANIA</h1>
+            <div>
+                <div className="title text-9xl mt-15">
+                    <h1>PIJAMAMANIA</h1>
+                </div>
+                <button 
+                onClick={()=>router.push("/user_form")}
+                className="cursor-pointer"
+                >
+                    <User_Icon/>
+                </button>
             </div>
             <br/>
             <Menu_Bar/>

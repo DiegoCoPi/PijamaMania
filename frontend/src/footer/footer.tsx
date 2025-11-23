@@ -8,7 +8,10 @@ const Footer = ()=>{
                 </div>
                 <div className="text-right">
                     <h2 className="font-bold">Visitanos en nuestras redes sociales</h2>
-                    <button className="cursor-pointer">
+                    <button 
+                    type="button" 
+                    className="cursor-pointer"
+                    >
                         <div className="flex flex-row space-x-0">
                             <Image
                             src="/social-media/instagram.png"
@@ -21,7 +24,6 @@ const Footer = ()=>{
                     </button>
                 </div>
             </div>
-
         </footer>
     )
 }
