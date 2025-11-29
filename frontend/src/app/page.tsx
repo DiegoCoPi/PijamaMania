@@ -10,8 +10,8 @@ function Initial (){
     
     return(
         <div>
-            <div>
-                <div className="title text-9xl mt-15">
+            <div className="flex justify-end gap-20">
+                <div className="title mt-12 text-9xl ">
                     <h1>PIJAMAMANIA</h1>
                 </div>
                 <button 

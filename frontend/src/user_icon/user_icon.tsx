@@ -3,7 +3,7 @@ import Image from "next/image"
 
 function User_Icon(){
     return(
-        <div className="flex flex-col gap-5 mr-20 items-center">
+        <div className="flex flex-col gap-5 mr-15 items-center mt-10">
             <div>
                 <Image
                 src="/img/icono_usuario.png"
@@ -13,7 +13,7 @@ function User_Icon(){
                 />
             </div>
             <div>
-                <h2>Ingrese o crea tu cuenta</h2>
+                <h2 className="text-yellow-400">Ingrese o crea tu cuenta</h2>
             </div>
         </div>
     )
