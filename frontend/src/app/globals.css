@@ -27,9 +27,9 @@
 
   .paragraph{
     font-family: "Irish Grover", cursive;
-    -webkit-text-stroke: 1px purple;   
-    -webkit-text-fill-color: yellow;  
-    color: yellow;                     
+    -webkit-text-stroke: 1px yellow;   
+    -webkit-text-fill-color: purple;  
+    color: purple;                     
     text-align: left;
     font-weight: bold;
   }
