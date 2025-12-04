@@ -7,7 +7,7 @@
 /* Clase global para títulos */
 @layer components {
   .title {
-    @apply text-center font-normal leading-[100px] text-[40px]; /* Utilizamos utilidades de Tailwind donde es posible */
+    @apply text-center font-normal leading-[100px] text-[70px]; /* Utilizamos utilidades de Tailwind donde es posible */
     /*background: linear-gradient(
       180deg,
       rgba(255, 215, 0, 1) 33%,
@@ -26,7 +26,6 @@
   }
 
   .paragraph{
-
     font-family: "Irish Grover", cursive;
     -webkit-text-stroke: 1px purple;   
     -webkit-text-fill-color: yellow;  
@@ -36,6 +35,7 @@
   }
   .form-bg{
     background-image: url("/buttoms/navidad_3.jpg");
+    border-radius: 30px;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;

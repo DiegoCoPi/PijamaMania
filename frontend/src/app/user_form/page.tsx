@@ -12,7 +12,8 @@ function CreateForm(){
         email:false,
         address:false,
         password:false,
-        confirm:false
+        confirm:false,
+        age:false
     })
 
     const [form, setForm] = useState({
@@ -26,7 +27,7 @@ function CreateForm(){
         confirm:""
     })
 
-
+    //Manejar los cambios en la casillas (inputs)
     const handleSubmit=(e: React.FormEvent<HTMLFormElement>)=>{
         
         e.preventDefault();
@@ -44,7 +45,7 @@ function CreateForm(){
 
         setError(newErrors)
 
-        if(newErrors.name || newErrors.lastname){
+        if(Object.values(newErrors).includes(true)){
             alert("Por favor diriga los campos del formulario")
             return
         }
@@ -53,120 +54,130 @@ function CreateForm(){
 
     }
 
-    return(
-        <div className="flex justify-center items-center min-h-screen mt-1 mb-10">
-            <div className="text-center">
-                <h1 className="title text-7xl">Formulario de registro</h1>
-                <form className="form-bg pt-10 pl-6 pr-6 pb-3 w-full max-w-2xl rounded-2xl shadow-2xl mx-auto">
-                    {/*Inicio de Formulario */}
-                    <div className="flex flex-col gap-8 w-full max-w-md text-yellow-400">
-                        {/*Casilla de Nombres y Apelliidos */}
-                        <div className="flex flex-row gap-[190px]">
-                            <div className="flex flex-row gap-3.5 ">
-                                <label>Nombre(s):</label>
-                                <div className="flex w-15">
-                                    <input 
-                                    type="text" 
-                                    className={`bg-violet-600 border-yellow-400 border-2 w-50 h-8 p-0.5 rounded
-                                    ${error.name ? "border-red-600":{}}`} 
-                                    placeholder="Nombre(s)"
-                                    onChange={(e)=>setForm({...form, name:e.target.value})}
-                                    onBlur={()=>setError({...error, name:form.name.trim()===""})}
-                                    />
-                                   {error.name && (
-                                        <p className="text-yellow-500 text-sm mt-1">Este campo es obligatorio</p>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="flex flex-row gap-3.5">
-                                <label>Apellido(s):</label>
-                                <div className="flex w-15">
-                                    <input 
-                                    type="text" 
-                                    className="bg-violet-600 border-yellow-400 border-2 w-50 h-8 p-0.5 rounded"
-                                    placeholder="Apellido(s)"
-                                    />
-                                </div>
-                            </div>
-                        </div>
+    const verifyAge =():boolean=>{
+        
+        //Comprueba si hay entrada en la casilla
+        if(!form.date) return false
 
-                        {/*Fecha de nacimiento y Telefono*/}
-                        <div className="flex flex-row gap-25">
-                            <div className="flex flex-row gap-3 items-center">
-                                <label>Fecha nacimiento:</label>
-                                <div className="flex flex-row items-center gap-1">
-                                    <input 
-                                    type="date" 
-                                    className="bg-violet-600 border-yellow-400 border-2 w-35 p-0.5 rounded"
-                                    placeholder="dd/mm/aaaa"
-                                    />
-                                    <Image
-                                    src="/img/calendario.png"
-                                    alt="calendario"
-                                    width={30}
-                                    height={30}
-                                    className=""
-                                    />
-                                </div>
-                            </div>
-                            <div className="flex flex-row gap-3">
-                                <label>Telefono/cel:</label>
+        //Se extrae el dato del año de la fecha actual y de nacimiento
+        const birthDate = new Date(form.date);
+        const today = new Date()
+
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth()
+
+        //Se compara si cumple con 18 años
+        if(monthDiff<0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())){
+            age--;
+        }
+        return age>=18
+
+
+
+
+    }
+
+    return(
+        <div>
+            <h1 className="title">Formulario de registro de usuarios</h1>
+            {/*Aqui empieza el formulario*/}
+            <div className=" flex justify-center mt-[30px]">
+                <form className="form-bg text-yellow-400 p-8">
+                    {/*Casilla de Nombres y apellidos*/}
+                    <div className="flex flex-row gap-10">
+                        {/*Nombre*/}
+                        <div className="flex flex-row gap-[10px]">
+                            <label>Nombre(s):</label>
+                            <div className="flex flex-col gap-[1px]">
                                 <input
                                 type="text"
-                                className="bg-violet-600 border-yellow-400 border-2 w-35 h-8 p-0.5 rounded"
-                                placeholder="Sin espcacios ni puntos"
+                                className={`bg-yellow-400 text-red-600 ${error.name ? "border-1":"border-green-600"}`}
+                                value={form.name}
+                                onChange={(e)=>setForm({...form, name:e.target.value})}
                                 />
-                            </div>
-                        </div> 
-
-                        {/*Correo y dirección*/}
-                        <div className="flex flex-row gap-46">
-                            <div className="flex flex-row gap-10">
-                                <label>Correo:</label>
-                                <div className="w-16">
-                                <input type="text" 
-                                className="bg-violet-600 border-yellow-400 border-2 flex-1 p-0.5 rounded" 
-                                placeholder="correo válido" />
-                                </div>
-                            </div>
-                            <div className="flex flex-row gap-4">
-                                <label>Dirección:</label>
-                                <div className="w-16">
-                                <input type="text" 
-                                className="bg-violet-600 border-yellow-400 border-2 flex-1 w-50 h-8 p-0.5 rounded" 
-                                placeholder="correo válido" />
-                                </div>
+                                {error.name && (
+                                    <p className="text-xs">*Obligatorio</p>
+                                )}
                             </div>
                         </div>
-
-                        {/*Contraseña y confirmación*/}
-                        <div className="flex flex-row gap-15">
-                            <div className="flex flex-row gap-2">
-                                <label>Contraseña:</label>
-                                <input type="text" 
-                                className="bg-violet-600 border-yellow-400 border-2 flex-1 p-0.5 h-7 rounded" 
-                                placeholder="correo válido" />
-                            </div>
-                            <div className="flex flex-row gap-5">
-                                <label>Confirmar:</label>
-                                <input type="text" 
-                                className="bg-violet-600 border-yellow-400 border-2 flex-1 p-0.5 h-7 rounded" 
-                                placeholder="correo válido"
+                        {/*Apellido*/}
+                        <div className="flex flex-row gap-[10px]">
+                            <label>Apellido(s):</label>
+                            <div className="flex flex-col gap-[1px]">
+                                <input
+                                type="text"
+                                className={`bg-yellow-400 text-red-600 ${error.lastname ? "border-1":"border-green-600"}`}
+                                value={form.lastname}
+                                onChange={(e)=>setForm({...form, lastname:e.target.value})}
                                 />
+                                {error.lastname && (
+                                    <p className="text-xs">*Obligatorio</p>
+                                )}
                             </div>
-                        </div>   
-                        {/*Botones del formulario*/}
-                        <div className="flex flex-row gap-5 justify-center">
-                            <button className="bg-yellow-300 text-red-600 cursor-pointer hover:scale-110 p-2 rounded-3xl">
-                                Crear cuenta
-                            </button>
-                            <button className="bg-yellow-300 text-red-600 cursor-pointer hover:scale-110 p-2 px-6 rounded-3xl">
-                                Volver
-                            </button>
                         </div>
                     </div>
+                    {/*Casillas de fecha nacimiento y correo*/}
+                    <div className="mt-[25px] flex flex-row gap-[30px]">
+                        {/*Fecha nacimiento*/}
+                        <div className="flex flex-row gap-[10px]">
+                            <label>Fecha nacimiento:</label>
+                            <div className="flex flex-col gap-[1px]">
+                                <input
+                                type="date"
+                                className={`bg-yellow-400 text-red-600 ${error.date ? "border-1":"border-green-600"}`}
+                                />
+                                {error.date && (
+                                    <p className="text-xs">*Fecha incorrecta</p>
+                                )}
+                                {error.age}
+                            </div>
+                        </div>
+                        {/*Correo*/}
+                        <div className="flex flex-row gap-[52px]">
+                            <label>Email:</label>
+                            <div>
+                                <input
+                                type="email"
+                                className={`bg-yellow-400 text-red-600 ${error.email ? "border-1":"border-green-600"}`}
+                                />
+                                {error.email && (
+                                    <p className="text-xs">Correo no valido</p>
+                                )}
+                                {error.age && (
+                                    <p>No eres mayor de edad para crear esta cuenta</p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    {/*Contraseñas y confirmación*/}
+                    <div className="mt-[25px]">
+                        {/*Contraseña*/}
+                        <div className="flex flex-row gap-[5px]">
+                            <label>Contraseña:</label>
+                            <div  className="flex flex-col gap-[5px]">
+                                <input
+                                type="password"
+                                className={`bg-yellow-400 text-red-600 ${error.password ? "border-2":"border-green-500"}`}
+                                />
+                                {error.password &&(
+                                    <p className="text-xs">Contraseña no valida</p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    {/*Botones*/}
+                    <br/>
+                    <div className="flex flex-row gap-7 justify-center">
+                        <button onClick={handleSubmit} className="bg-yellow-400 text-red-600">
+                            Crear usuario
+                        </button>
+                        <button className="bg-yellow-400 text-red-600">
+                            Cancelar
+                        </button>
+                    </div>
+                {/*Aqui termina el formulario*/}
                 </form>
-            </div>
+            </div>                
         </div>
     )
 
