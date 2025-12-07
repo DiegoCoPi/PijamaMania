@@ -5,23 +5,22 @@ import User_Icon from "@/user_icon/user_icon"
 import { useRouter } from "next/navigation"
 
 function Initial (){
-    
+
     const router = useRouter()
     
     return(
         <div>
-            <div className="flex justify-end gap-20">
-                <div className="title mt-12 text-9xl ">
-                    <h1>PIJAMAMANIA</h1>
+            <div className="flex justify-center gap-20">
+                <h1 className="title">PIJAMAMANIA</h1>
+                <div>
+                     <button 
+                        onClick={()=>router.push("/user_form")}
+                        className="cursor-pointer"
+                        >
+                        <User_Icon/>
+                    </button>
                 </div>
-                <button 
-                onClick={()=>router.push("/user_form")}
-                className="cursor-pointer"
-                >
-                    <User_Icon/>
-                </button>
             </div>
-            <br/>
             <Menu_Bar/>
             <br/>
             <div className="ml-20 mr-20 mt-5 mb-5">

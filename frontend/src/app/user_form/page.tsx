@@ -1,10 +1,13 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useFormState } from "react-dom";
 import { BiShow } from "react-icons/bi";
 
 function CreateForm(){
+
+    const router = useRouter()
 
     const [error, setError]=useState({
             name:false,
@@ -122,16 +125,10 @@ function CreateForm(){
 
     }
 
-    const calendar=() =>{
-        const input = document.getElementById("birthday") as HTMLInputElement;
-        if (input?.showPicker) {
-      input.showPicker();} 
-      else {input?.focus();}
-    };
 
     return(
             <div>
-                <h1 className="title">Formulario de registro de usuarios</h1>
+                <h1 className="title text-6xl">Bienvemidos al formulario de registro de usuarios</h1>
                 {/*Aqui empieza el formulario*/}
                 <div className=" flex justify-center mt-[30px]">
                     <form onSubmit={handleSubmit} className="form-bg text-yellow-400 p-8">
@@ -256,20 +253,25 @@ function CreateForm(){
                             </div>
                             {/*Confirmación*/}
                             <div className="flex flex-row gap-[15px]">
-                                <label>Confirmar</label>
-                                <div>
+                                <label>Confirmar:</label>
+                                <div className="relative flex flex-col">
                                     <input
-                                    type="password"
-                                    className={`bg-yellow-400 text-red-600 ${error.email ? "border-1":"border-green-600"}`}
-                                    value={form.confpass}
-                                    onChange={(e)=>setForm({...form, confpass:e.target.value})}
+                                        type={showConfpass ? "text" : "password"}
+                                        className={`bg-yellow-400 text-red-600 ${error.confpass ? "border-1":"border-green-600"}`}
+                                        value={form.confpass}
+                                        onChange={(e)=>setForm({...form, confpass:e.target.value})}
                                     />
-                                    {error.confpass&&(<p className="text-xs">Confirme la contraseña</p>)}
-                                    {error.confpass&&(<p className="text-xs">Confirme la contraseña</p>)}
+
+                                    {/* Ícono centrado + corrección de estado */}
+                                    <BiShow
+                                        className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer text-red-600"
+                                        size={22}
+                                        onClick={() => setShowConfpass(!showConfpass)}
+                                    />
+
+                                    {error.confpass && (<p className="text-xs">Contraseña no coincide</p>)}
                                 </div>
                             </div>
-                        </div>
-                        <div>
                         </div>         
                         {/*Botones*/}
                         <br/>
@@ -279,7 +281,9 @@ function CreateForm(){
                             className="bg-yellow-400 text-red-600 p-[8px] cursor-pointer hover:scale-115">
                                 Crear usuario
                             </button>
-                            <button 
+                            <button
+                            type="submit"
+                            onClick={()=>router.push("/")} 
                             className="bg-yellow-400 text-red-600 p-[8px] cursor-pointer hover:scale-115">
                                 Cancelar
                             </button>
