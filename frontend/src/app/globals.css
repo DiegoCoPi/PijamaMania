@@ -32,7 +32,23 @@
     background-attachment: fixed;
     background-size: 100% 100%;
   }
+  
+  .form-2 {
+  background: linear-gradient(
+    90deg,                /* Ángulo del gradiente */
+    rgb(219, 45, 26) 25%,
+    rgb(7, 171, 37) 50%,
+    rgb(219, 45, 26) 75%,
+    rgb(7, 171, 37) 100%
+  );
+  border-radius: 30px;
+  background-position: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-size: cover;  
+  width: 300px;  
 }
+
 /* Estilo global para el fondo del body */
 body {
   @apply m-0 min-h-screen;
@@ -49,12 +65,11 @@ body {
     rgba(192, 192, 192, 1) 61%,
     rgba(79, 209, 147, 1) 81%,
     rgba(252, 82, 82, 1) 100%
-  );*/
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 100%;
+    );*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+  }
+
 }
-
-
-
 
