@@ -14,7 +14,7 @@ function Initial (){
                 <h1 className="title">PIJAMAMANIA</h1>
                 <div>
                      <button 
-                        onClick={()=>router.push("/loggin")}
+                        onClick={()=>router.push("/logging")}
                         className="cursor-pointer"
                         >
                         <User_Icon/>
