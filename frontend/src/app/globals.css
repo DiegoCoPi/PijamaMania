@@ -48,14 +48,17 @@
   background-size: cover;  
   width: 300px;  
 }
+ .model{
+    background-image: url('/buttoms/navidad_3.jpg')
+}
+
+.password{
+  background-image: url('/buttoms/navidad_5.jpg')
+}
 
 /* Estilo global para el fondo del body */
 body {
   @apply m-0 min-h-screen;
-  background-image: 
-  linear-gradient(rgba(138, 6, 6, 0.6), rgba(30, 29, 29, 0.6)),
-  url("/bottoms/navidad_2.jpg");
-
   background-image: url("/buttoms/navidad_1.jpg");
   /*background: linear-gradient(
     180deg,
@@ -69,6 +72,10 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
+  }
+  .buttons{
+    background-color: yellow;
+    -webkit-text-fill-color: red;
   }
 
 }

@@ -1,9 +1,9 @@
 import Image from "next/image"
 const Footer = ()=>{
     return(
-        <footer className="bg-[rgba(232,79,79,1)] text-yellow-400 mt-10 pt-2 pb-2">
+        <footer className="bg-[rgba(232,79,79,1)] text-yellow-400 mb-0 mt-10 pt-2 pb-2">
             <div className="flex justify-between items-center px-16">
-                <div>
+                <div>   
                     <p className="text-left pl-1 text-3xl">Todos los derechos reservados © Diego Corrales 2025</p>
                 </div>
                 <div className="text-right">
