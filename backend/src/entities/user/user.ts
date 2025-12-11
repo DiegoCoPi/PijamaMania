@@ -1,6 +1,5 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinTable, OneToMany, PrimaryColumn } from "typeorm";
 import { UserInt } from "./user.interface";
-import { Products } from "../products/products";
 import { Orders } from "../orders/orders";
 
 
@@ -8,7 +7,7 @@ import { Orders } from "../orders/orders";
 export class User implements UserInt{
 
     @PrimaryColumn()
-    id: number;
+    idNumber: number;
 
     @Column()
     name:string;
@@ -17,7 +16,7 @@ export class User implements UserInt{
     lastname: string;
 
     @Column()
-    date: Date;
+    birthdate: Date;
 
     @Column()
     address: string;
@@ -31,10 +30,6 @@ export class User implements UserInt{
     @Column()
     password: string;
 
-    @OneToMany(()=>Products,(product)=>product.user)
-    products:Products[];
-
-    @ManyToMany(()=>Orders)
-    @JoinTable()
+    @OneToMany(()=>Orders,(order)=>order.user)
     orders:Orders[]
 }

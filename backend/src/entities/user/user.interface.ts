@@ -1,8 +1,8 @@
 export interface UserInt {
-    id:number;
+    idNumber:number;
     name:string;
     lastname:string;
-    date:Date;
+    birthdate:Date;
     address:string;
     email:string;
     phone:number;
