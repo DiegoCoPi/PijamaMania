@@ -1,5 +1,7 @@
+import { User } from "../user/user"
+
 export interface IntOrders{
     id:number,
-    userID:number,
+    user:User
     createDate:Date
 }

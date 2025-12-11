@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryColumn } from "typeorm";
 import { ProductInte } from "./products.interface";
 import { User } from "../user/user";
+import { Orders } from "../orders/orders";
 
 
 @Entity()
@@ -14,7 +15,7 @@ export class Products implements ProductInte{
     name:string
     
     @Column()
-    categories: "babies" | "children" | "teenegers-adults";
+    category: "babies" | "children" | "teenegers-adults";
 
     @Column()
     type: "pijamas" | "accesories-ladies" | "accesories-babies";
@@ -25,7 +26,7 @@ export class Products implements ProductInte{
     @Column()
     stock:number
 
-    @ManyToOne(()=>User,(user)=>user.products)
-    user: User;
+    @ManyToMany(()=>Orders, (order)=>order.products)
+    orders:Orders[]
 
 }

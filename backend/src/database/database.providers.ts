@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm"
 
-const databaseProviders = [{
+export const databaseProviders = [{
     provide:'DATA_SOURCE',
     useFactory: async() =>{
         const datasource = new DataSource({
