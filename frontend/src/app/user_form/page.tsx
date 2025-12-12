@@ -14,7 +14,7 @@ function CreateForm(){
             idNumber:false,
             name:false,
             lastname:false,
-            date:false,
+            birthdate:false,
             email:false,
             phone:false,
             address:false,
@@ -28,7 +28,7 @@ function CreateForm(){
             idNumber:"",
             name:"",
             lastname:"",
-            date:"",
+            birthdate:"",
             email:"",
             phone:"",
             address:"",
@@ -50,7 +50,7 @@ function CreateForm(){
                 idNumber: form.idNumber.trim()==="",
                 name: form.name.trim()==="",
                 lastname: form.lastname.trim()==="",
-                date:form.date.trim()==="",
+                birthdate:form.birthdate.trim()==="",
                 phone:form.phone.trim()==="",    
                 email:form.email.trim()==="",
                 address:form.address.trim()==="",
@@ -69,7 +69,7 @@ function CreateForm(){
 
             //Validación de la edad
 
-            const birthDate = new Date(form.date)
+            const birthDate = new Date(form.birthdate)
             const today = new Date()
 
             const birthyerar = birthDate.getFullYear();
@@ -103,16 +103,7 @@ function CreateForm(){
             //Aqui se incorpora el axios de la pagina web
 
             try{
-                const response =await axios.post('http://localhost:3000/user',{
-                    idNumber: Number(form.idNumber),
-                    name: form.name,
-                    lastname: form.lastname,
-                    date:form.date,
-                    phone:form.phone,    
-                    email:form.email,
-                    address:form.address,
-                    password:form.password,
-                })
+                const response =await axios.post('http://localhost:3000/user',form)
                 
                 alert("El usuario ha sido creado exitosamente");
             
@@ -124,7 +115,7 @@ function CreateForm(){
                     alert("El usuario ya se encuantra registrado")
                 }
                 else{
-                    alert("Error añ crear el usuario")
+                    alert("Error al crear el usuario"+error)
                 }
             }
 
@@ -135,7 +126,7 @@ function CreateForm(){
                 idNumber:"",
                 name:"",
                 lastname:"",
-                date:"",
+                birthdate:"",
                 email:"",
                 phone:"",
                 address:"",
@@ -147,7 +138,7 @@ function CreateForm(){
                 idNumber:false,
                 name:false,
                 lastname:false,
-                date:false,
+                birthdate:false,
                 email:false,
                 age:false,
                 phone:false,
@@ -203,11 +194,11 @@ function CreateForm(){
                                 <div className="flex flex-col gap-[1px]">
                                     <input
                                     type="date"
-                                    className={`bg-yellow-400 text-red-600 ${error.date ? "border-1":"border-green-600"}`}
-                                    value={form.date}
-                                    onChange={(e)=>setForm({...form, date:e.target.value})}
+                                    className={`bg-yellow-400 text-red-600 ${error.birthdate ? "border-1":"border-green-600"}`}
+                                    value={form.birthdate}
+                                    onChange={(e)=>setForm({...form, birthdate:e.target.value})}
                                     />
-                                    {error.date && (
+                                    {error.birthdate && (
                                         <p className="text-xs">*Fecha incorrecta</p>
                                     )}
                                     {error.age && (
