@@ -25,7 +25,7 @@ export class User implements UserInt{
     email: string;
 
     @Column()
-    phone: number;
+    phone: string;
 
     @Column()
     password: string;

@@ -47,9 +47,9 @@ function Logging(){
                             className="cursor-pointer">
                                 ¿Olvido su contraseña?
                             </a>
-                            <a onClick={()=>router.push("/")}
+                            <a onClick={()=>router.push("/user_form")}
                             className="cursor-pointer">
-                                Volver al Inicio
+                                Crear cuenta
                             </a>
                         </div>
                     </div>

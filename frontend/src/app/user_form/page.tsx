@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -10,6 +11,7 @@ function CreateForm(){
     const router = useRouter()
 
     const [error, setError]=useState({
+            idNumber:false,
             name:false,
             lastname:false,
             date:false,
@@ -23,6 +25,7 @@ function CreateForm(){
 
         //Vacia las casillas
         const [form, setForm] = useState({
+            idNumber:"",
             name:"",
             lastname:"",
             date:"",
@@ -39,11 +42,12 @@ function CreateForm(){
 
         //Manejar los cambios en la casillas (inputs)
         /*-----------------------------------------------------------------------------------------*/
-        const handleSubmit=(e: React.FormEvent<HTMLFormElement>)=>{
+        const handleSubmit=async (e: React.FormEvent<HTMLFormElement>)=>{
             
             e.preventDefault();
 
             const newErrors ={
+                idNumber: form.idNumber.trim()==="",
                 name: form.name.trim()==="",
                 lastname: form.lastname.trim()==="",
                 date:form.date.trim()==="",
@@ -96,11 +100,39 @@ function CreateForm(){
                 return
             }
             
+            //Aqui se incorpora el axios de la pagina web
+
+            try{
+                const response =await axios.post('http://localhost:3000/user',{
+                    idNumber: Number(form.idNumber),
+                    name: form.name,
+                    lastname: form.lastname,
+                    date:form.date,
+                    phone:form.phone,    
+                    email:form.email,
+                    address:form.address,
+                    password:form.password,
+                })
+                
+                alert("El usuario ha sido creado exitosamente");
+            
+            }
+                
+            catch(error:any){
+                console.log(error)
+                if(error.response?.status===409){
+                    alert("El usuario ya se encuantra registrado")
+                }
+                else{
+                    alert("Error añ crear el usuario")
+                }
+            }
 
             alert("Cuenta creada exitosamente")
 
 
             setForm({
+                idNumber:"",
                 name:"",
                 lastname:"",
                 date:"",
@@ -112,6 +144,7 @@ function CreateForm(){
             })
 
             setError({
+                idNumber:false,
                 name:false,
                 lastname:false,
                 date:false,
@@ -132,7 +165,7 @@ function CreateForm(){
                 {/*Aqui empieza el formulario*/}
                 <div className=" flex justify-center mt-[30px]">
                     <form onSubmit={handleSubmit} className="form-bg text-yellow-400 p-8">
-                        {/*Casilla de Nombres y apellidos*/}
+                        {/*Casilla de Nombres, apellidos y fecha de nacimiento*/}
                         <div className="flex flex-row gap-10">
                             {/*Nombre*/}
                             <div className="flex flex-row gap-[10px]">
@@ -164,10 +197,7 @@ function CreateForm(){
                                     )}
                                 </div>
                             </div>
-                        </div>
-                        {/*Casillas de fecha nacimiento y telefóno*/}
-                        <div className="mt-[25px] flex flex-row gap-[30px]">
-                            {/*Fecha nacimiento*/}
+                             {/*Fecha nacimiento*/}
                             <div className="flex flex-row gap-[10px]">
                                 <label>Fecha nacimiento:</label>
                                 <div className="flex flex-col gap-[1px]">
@@ -185,7 +215,25 @@ function CreateForm(){
                                     )}
                                 </div>
                             </div>
-                            {/*Telefóno*/}
+                        </div>
+                        {/*Casillas de documento, telefóno y dirección*/}
+                        <div className="mt-[25px] flex flex-row gap-[30px]">
+                            {/*Documento*/}
+                            <div className="flex flex-row gap-[30px]">
+                                <label>N° Documento:</label>
+                                <div>
+                                    <input
+                                    type="number"
+                                    className={`bg-yellow-400 text-red-600 ${error.idNumber ? "border-1":"border-green-600"}`}
+                                    value={form.idNumber}
+                                    onChange={(e)=>setForm({...form, idNumber:e.target.value})}
+                                    />
+                                    {error.idNumber && (
+                                        <p className="text-xs">Ingrese un umero de documento valido</p>
+                                    )}
+                                </div>
+                            </div> 
+                            {/*Telefóno */}
                             <div className="flex flex-row gap-[30px]">
                                 <label>Telefóno:</label>
                                 <div>
@@ -196,26 +244,26 @@ function CreateForm(){
                                     onChange={(e)=>setForm({...form, phone:e.target.value})}
                                     />
                                     {error.phone && (
-                                        <p className="text-xs">Número telefónico invalido</p>
+                                        <p className="text-xs">Ingrese un numero telefónico valido</p>
                                     )}
                                 </div>
-                            </div>   
-                        </div>
-                        {/*Dirección y correo*/}
-                        <div className="flex flex-row gap-[40px] mt-[28px]">
+                            </div> 
                             {/**Dirección */}
                             <div className="flex flex-row gap-[20px]">
                                 <label>Dirección:</label>
                                 <div>
                                     <input
                                     type="text"
-                                    className={`bg-yellow-400 text-red-600 ${error.phone ? "border-1":"border-green-600"}`}
+                                    className={`bg-yellow-400 text-red-600 ${error.address ? "border-1":"border-green-600"}`}
                                     value={form.address}
                                     onChange={(e)=>setForm({...form,address:e.target.value})}
                                     />
                                     {error.address &&(<p className="text-xs">Dirección Invalida</p>)}
                                 </div>
-                            </div>
+                            </div>        
+                        </div>
+                        {/*Correo, COntraseña y confirmación de contraseña*/}
+                        <div className="flex flex-row gap-[40px] mt-[28px]">
                             {/*Correo*/}
                             <div className="flex flex-row gap-[32px]">
                                 <label>Correo:</label>
@@ -229,10 +277,7 @@ function CreateForm(){
                                      {error.email && (<p className="text-xs">Correo no valido</p>)}
                                 </div>        
                             </div>
-                        </div>
-                        {/*Contraseña y confirmación*/}
-                        <div className="mt-[28px] flex flex-row gap-[35px]">
-                            {/*Contraseña*/}
+                             {/*Contraseña*/}
                             <div className="flex flex-row gap-[7px]">
                                 <label>Contraseña:</label>
                                 <div className="relative flex flex-col">
@@ -272,7 +317,7 @@ function CreateForm(){
                                     {error.confpass && (<p className="text-xs">Contraseña no coincide</p>)}
                                 </div>
                             </div>
-                        </div>         
+                        </div>      
                         {/*Botones*/}
                         <br/>
                         <div className="flex flex-row gap-7 justify-center">
