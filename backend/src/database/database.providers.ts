@@ -10,10 +10,13 @@ export const databaseProviders = [{
             username:process.env.DB_USERNAME,
             password:process.env.DB_PASSWORD,
             database:process.env.DB_NAME,
-            entities:[__dirname+'/../**/*/entities{.ts,.js}'],
+            entities: [__dirname + '/../**/*{.ts,.js}'],
             synchronize:true
         })
-        return datasource.initialize()
+        return datasource.initialize().catch((err)=>{
+            console.log('Error al inicializar la DB', err);
+            throw err
+        })
     }
 
 }]
