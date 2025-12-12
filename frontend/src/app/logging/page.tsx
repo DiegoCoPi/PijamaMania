@@ -1,10 +1,17 @@
 "use client";
 import { useRouter } from "next/navigation"
+import { useState } from "react";
 import { BiShow } from "react-icons/bi"
 
 function Logging(){
 
     const router = useRouter()
+
+    //Ingreso de usuario
+
+    const [form, setForm]=useState({
+        
+    })
 
     return(
         <section className="flex flex-col justify-center">
