@@ -5,6 +5,6 @@ export interface UserInt {
     birthdate:Date;
     address:string;
     email:string;
-    phone:number;
+    phone:string;
     password:string;
 }

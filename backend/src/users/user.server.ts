@@ -1,4 +1,4 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { ConflictException, Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { userDTO } from "src/dto/userDto";
 import { User } from "src/entities/user/user";
 import { Repository } from "typeorm";
@@ -10,9 +10,18 @@ export class UserService{
 
     //Servidor para ver ussuarios
     async findAll():Promise<User[]>{
-        return this.userRepository.find()
+        return await this.userRepository.find()
     }
 
+    //Servidor buscar por usuario ID
+    async sendUser(idNumber:number){
+        const userID = await this.userRepository.findOneBy({idNumber})
+        if(!userID){
+            throw new NotFoundException("Usuario no encontrado")
+        }
+
+        return userID
+    }
 
     //Servidor para crear un usuario
     async addUser(data:userDTO):Promise<User>{
@@ -22,7 +31,7 @@ export class UserService{
         })
 
         if(userExist){
-            throw new Error('El usuario ya se encuantra registrado')
+            throw new ConflictException('El usuario ya se encuantra registrado')
         }
 
         const newUser = this.userRepository.create({
@@ -36,7 +45,7 @@ export class UserService{
             password:data.password,
         });
 
-        return this.userRepository.save(newUser)
+        return await this.userRepository.save(newUser)
     }
 
     //Servidor para modificar algun dato

@@ -3,7 +3,7 @@ export class userDTO{
     name:string;
     lastname:string;
     birthdate:Date;
-    phone:number;
+    phone:string;
     email:string;
     address:string;
     password:string;

@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, NotFoundException,ConflictException, Param, Post, Put } from "@nestjs/common";
 import { UserService } from "./user.server";
 import { userDTO } from "src/dto/userDto";
 import { User } from "src/entities/user/user";
+import { error } from "console";
+import { get } from "http";
 
 @Controller('user')
 
@@ -19,13 +21,23 @@ export class UserController{
         }
     }
 
+    @Get(':idNumber')
+    async findUser(@Param('idNumber')idNumber:number){
+        try{
+            return await this.userService.sendUser(idNumber)
+        }
+        catch(error){
+            throw new NotFoundException("Usuario no encontrado");
+        }
+    }
+
     @Post()
     async userCreate(@Body() createUser:userDTO):Promise<User|null>{
         try{
             return await this.userService.addUser(createUser)
         }
-        catch{
-            throw new Error("Usuario no fue creado")
+        catch(error){
+            throw new ConflictException("Usuario no fue creado" + error.message)
         }
     }
 
