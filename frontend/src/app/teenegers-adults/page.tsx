@@ -1,7 +1,6 @@
 'use client'
 import Cards_Adults_Teenegers from "@/cards/cards_adults_teenegers"
 import Menu_Bar from "@/menu_bar/menu_bar"
-import Footer from "@/footer/footer"
 
 const Teenegers_Adults= ()=>{
     

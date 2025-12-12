@@ -1,8 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { Imprima } from "next/font/google";
 import Image from "next/image"
-import { userAgent } from "next/server"
+
 
 function Buy_Button(){
 
