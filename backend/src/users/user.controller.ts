@@ -41,7 +41,6 @@ export class UserController {
 
     @Post('login')
     async login(@Body() user: LoggingDTO) {
-        console.log("BODY RECIBIDO >>>", user);
         return await this.userService.loggingUser(user);
     }
 }

@@ -59,7 +59,6 @@ export class UserService{
 
 
     //Borrar o bloquear ussuario
-
     async deleteUser(idNumber:number):Promise<string>{
         const delUser = await this.userRepository.delete({idNumber})
 
@@ -70,7 +69,6 @@ export class UserService{
         return "Usuario Eliminado correctamente"
 
     }
-
 
 
     // Servidor para logearse
@@ -90,10 +88,18 @@ export class UserService{
             user = await this.userRepository.findOneBy({ phone: data.phone.trim() });
         }
 
-        console.log("Usuario encontrado:", user);
-
         // Validación de existencia y contraseña
-        if (!user || user.password.trim() !== data.password.trim()) {
+        if (!user) {
+            throw new UnauthorizedException("Usuario o contraseña no encontrada");
+        }
+
+        //Comparación de Contraseña
+        const passwordMatch = await bcrypt.compare(
+            data.password.trim(),
+            user.password,
+        );
+
+        if (!passwordMatch) {
             throw new UnauthorizedException("Usuario o contraseña no encontrada");
         }
 
