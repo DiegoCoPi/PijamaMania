@@ -1,7 +1,6 @@
 "use client";
 import Cards_Initial from "@/cards/cards_initial"
 import Menu_Bar from "@/menu_bar/menu_bar"
-import User_Icon from "@/user_icon/user_icon"
 import { useRouter } from "next/navigation"
 
 function Initial (){
@@ -10,18 +9,10 @@ function Initial (){
     
     return(
         <div>
+            <Menu_Bar/>
             <div className="flex justify-center gap-20">
                 <h1 className="title">PIJAMAMANIA</h1>
-                <div>
-                     <button 
-                        onClick={()=>router.push("/logging")}
-                        className="cursor-pointer"
-                        >
-                        <User_Icon/>
-                    </button>
-                </div>
             </div>
-            <Menu_Bar/>
             <br/>
             <div className="ml-20 mr-20 mt-5 mb-5">
                 <p className="paragraph text-3xl">

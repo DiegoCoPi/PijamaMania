@@ -14,7 +14,7 @@
     font-size: 80px;
   }
   .hover{
-    @apply hover:bg-[rgba(255,215,0,1)] hover:text-purple-900 px-4 py-2 rounded transition duration-300;
+    @apply hover:bg-[rgba(255,215,0,1)] hover:text-purple-900 px-4 py-2 rounded transition duration-300 cursor-pointer;
   }
 
   .paragraph{
@@ -26,7 +26,7 @@
     font-weight: bold;
   }
   .form-bg{
-    background-image: url("/buttoms/navidad_3.jpg");
+    background-color:rgb(227, 3, 138);
     border-radius: 30px;
     background-repeat: no-repeat;
     background-attachment: fixed;

@@ -1,18 +1,19 @@
 import Image from "next/image"
 
+
 function User_Icon(){
     return(
-        <div className="flex flex-col gap-5 mr-15 items-center mt-10">
+        <div className="flex flex-row gap-2 items-center cursor-pointer transition duration-300">
             <div>
                 <Image
                 src="/img/icono_usuario.png"
                 alt="ususrio"
                 height={20}
-                width={20}                
+                width={20}
                 />
             </div>
             <div>
-                <h2 className="text-yellow-400 text-xs">Ingrese o crea tu cuenta</h2>
+                <h2 className=" text-yellow-400 text-xl hover:bg-yellow-400 hover:text-blue-700 ">Iniciar Sección</h2>
             </div>
         </div>
     )
