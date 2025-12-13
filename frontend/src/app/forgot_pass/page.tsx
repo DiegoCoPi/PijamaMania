@@ -4,7 +4,7 @@ import { useState } from "react"
 
 function Forgot_Pass(){
     
-    const[email, setEmail] = useState()
+    const[email, setEmail] = useState<string>("")
     const[showModal, setShowModal] = useState(false)
     
     const sendRecover = ()=>{

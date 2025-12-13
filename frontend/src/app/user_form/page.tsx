@@ -1,9 +1,7 @@
 "use client";
-import axios from "axios";
-import Image from "next/image";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useFormState } from "react-dom";
 import { BiShow } from "react-icons/bi";
 
 function CreateForm(){
@@ -109,13 +107,13 @@ function CreateForm(){
             
             }
                 
-            catch(error:any){
-                console.log(error)
-                if(error.response?.status===409){
+            catch(error){
+                const axiosError = error as AxiosError;
+                if(axiosError.response?.status===409){
                     alert("El usuario ya se encuantra registrado")
                 }
                 else{
-                    alert("Error al crear el usuario"+error)
+                    alert("Error al crear el usuario"+axiosError.message)
                 }
             }
 

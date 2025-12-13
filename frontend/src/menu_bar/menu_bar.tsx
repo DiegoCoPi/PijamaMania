@@ -1,11 +1,11 @@
+"use client";
 //import BabiesChildren from "@/pijamas/babies_children/babies_children"
-import User_Icon from "@/user_icon/user_icon"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 function Menu_Bar(){
 
-    const router = useRouter()
+    //const router = useRouter()
 
     return(
         <nav className="flex justify-center m-10 text-4xl">
