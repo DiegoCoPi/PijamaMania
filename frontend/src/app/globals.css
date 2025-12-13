@@ -59,7 +59,7 @@
 /* Estilo global para el fondo del body */
 body {
   @apply m-0 min-h-screen;
-  background-image: url("/buttoms/navidad_1.jpg");
+  background-image: url("/");
   /*background: linear-gradient(
     180deg,
     rgba(76, 201, 240, 1),

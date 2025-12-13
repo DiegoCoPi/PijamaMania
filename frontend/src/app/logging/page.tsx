@@ -13,39 +13,13 @@ function Logging() {
     const [showPassword, setShowPassword] = useState(false);
     const [message, setMessage] = useState("");
 
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        try {
-            // Detectar si es correo o teléfono
-            const data: any = { password };
-            if (emailOrPhone.includes("@")) {
-                data.email = emailOrPhone;
-            } else {
-                data.phone = emailOrPhone;
-            }
-
-            const res = await axios.post("http://localhost:3000/user/login", data);
-            setMessage(res.data.message);
-            console.log("Usuario logueado:", res.data.user);
-
-            // Redirigir a otra página (ejemplo: dashboard)
-            router.push("/dashboard");
-        } catch (error: any) {
-            if (error.response) {
-                setMessage(error.response.data.message);
-            } else {
-                setMessage("Error de conexión con el servidor");
-            }
-        }
-    };
-
+    
     return (
         <section className="flex flex-col justify-center items-center h-screen">
             <h1 className="title">Ingrese a su cuenta</h1>
             <br />
             <form
-                onSubmit={handleLogin}
+    
                 className="form-bg flex text-yellow-400 flex-col gap-[10px] p-[15px] w-96"
             >
                 <div className="flex flex-col gap-7">
