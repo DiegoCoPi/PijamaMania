@@ -17,25 +17,27 @@ function Forgot_Pass(){
 
     return(
         <div>
-            <h1 className="title">Recuperación de contraseña</h1>
-            <div className="form-2 flex flex-col gap-3">
-                <div className="flex flex-col gap-3 p-4 justify-center">
-                    <label className="text-yellow-400">Correo Electrónico:</label>
-                    <input
-                    type="email"
-                    value={email}
-                    className="bg-yellow-400 text-red-600 rounded-3xl"
-                    onChange={(e)=>setEmail(e.target.value)}
-                    />
-                </div>
-                <div className="flex justify-center pb-[10px]">
-                    <button onClick={sendRecover}
-                    className="flex justify-center buttons cursor-pointer p-2 w-max
-                    hover:scale-120">
-                        Enviar
-                    </button>
-                </div>
-            </div>
+           <h1 className="title">Recuperación de contraseña</h1>
+            <div className="flex justify-center">
+                <form className="bg-[linear-gradient(45deg,rgba(3,154,247,0.83)_25%,rgba(26,2,69,0.86)_50%,rgba(3,154,247,0.83)_75%,rgba(26,2,69,0.86)_100%)] w-max
+                p-3">
+                    {/*Casilla de Correo Elctrónico*/}
+                    <div className="flex flex-row gap-4">
+                        <label className="text-yellow-400">Correo/telefóno:</label>
+                        <div>
+                            <input
+                            type="text"
+                            className="bg-[rgb(249,0,149)] rounded-3xl border-[3px] border-blue-700"
+                            />
+                        </div>
+                    </div>
+                    <br/>
+                    <button className="buttons hover">Enviar</button>
+                    <div>
+                        <a className="cursor-pointer  hover:text-yellow-500">¿Olvido su contraseña?</a>
+                    </div>
+                </form>
+           </div>
             {/*Modal*/}
             {showModal && (
                 <div className="fixed inset-0 password  bg-opacity-60 flex justify-center items-center">

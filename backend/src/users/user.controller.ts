@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, NotFoundException, ConflictException, Param, Post, Put } from "@nestjs/common";
-import { UserService } from "./user.server";   // CORREGIDO
+import { UserService } from "./user.service";   // CORREGIDO
 import { userDTO } from "src/dto/userDto";
-import { User } from "src/entities/user/user";
+import { User } from "src/entities/user/user.entity";
 import type { LoggingDTO } from "src/dto/logging";
 
 @Controller('user')

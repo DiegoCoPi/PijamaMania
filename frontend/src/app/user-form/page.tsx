@@ -312,6 +312,7 @@ function CreateForm(){
                         <div className="flex flex-row gap-7 justify-center">
                             <button
                             type="submit"
+                            onClick={()=>router.push("/login")}
                             className="bg-yellow-400 text-red-600 p-[8px] cursor-pointer hover:scale-115">
                                 Crear usuario
                             </button>

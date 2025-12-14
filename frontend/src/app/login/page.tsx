@@ -12,8 +12,7 @@ function LoginUser(){
     const[pass, setPass]=useState(false)*/
 
     const[form,setForm]=useState({
-        email:"",
-        phone:"",
+        identifier:"",
         password:""
     })
 
@@ -26,25 +25,36 @@ function LoginUser(){
         });
     };
 
-    const handleSubmit = async(e:React.FormEvent)=>{
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError("");
 
-        setError("")
-    
-        try{
-            const response = await axios.post('http://localhost:3000/user/login',form);
-            alert("Ingreso exitoso")
-            router.push("/")
-        }
-        catch(error){
-            if(axios.isAxiosError(error)){
-                setError(error.response?.data?.message || "Usuario y/o contraseña erronea");
+        const payload = form.identifier.includes("@")
+        ?{email: form.identifier, password: form.password}
+        :{phone: form.identifier, password: form.password};
+
+        try {
+            const response = await axios.post("http://localhost:3000/user/login",payload);
+
+            console.log("LOGIN RESPONSE 👉", response.data);
+            
+            //Guardado de datos del ususario
+            localStorage.setItem("user", JSON.stringify(response.data.user));
+            localStorage.setItem("token", response.data.access_token);
+            router.push("/");
+        } 
+        catch (error) {
+            if (axios.isAxiosError(error)) {
+            setError(
+                error.response?.data?.message || "Usuario y/o contraseña incorrectos"
+            );
+            } else {
+            setError("Error inesperado, inténtalo más tarde");
             }
-            else{
-                setError("Error inesperado, intenalo más tarde")        
-            }
         }
-    }
+    };
+
+
    return (
             <div>
             <h1 className="title mt-0">Ingrese a su cuenta</h1>
@@ -56,7 +66,7 @@ function LoginUser(){
                         <div className="flex justify-center flex-row gap-2">
                         <label>Correo/Tel:</label>
                         <input
-                            name="email"
+                            name="identifier"
                             className="bg-white text-black w-39"
                             onChange={handleChange}
                         />
@@ -102,8 +112,16 @@ function LoginUser(){
                             onClick={() => router.push("/user-form")}
                             className="cursor-pointer hover:text-yellow-400"
                         >
-                            ¿Eres nuevo?, crea tu cuenta aquí
+                            Crea tu cuenta aquí
                         </a>
+                        </div>
+                        <div className="flex justify-center">
+                            <a
+                                onClick={()=>router.push("/")}
+                                className="cursor-pointer hover:text-yellow-400"
+                            >
+                                Volver al inicio
+                            </a>
                         </div>
 
                     </div>

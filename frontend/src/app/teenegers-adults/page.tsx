@@ -1,6 +1,6 @@
 'use client'
-import Cards_Adults_Teenegers from "@/cards/cards_adults_teenegers"
-import Menu_Bar from "@/menu_bar/menu_bar"
+import Cards_Adults_Teenegers from "@/components/cards/cards_adults_teenegers"
+import Menu_Bar from "@/components/menu_bar/menu_bar"
 
 const Teenegers_Adults= ()=>{
     
@@ -9,8 +9,6 @@ const Teenegers_Adults= ()=>{
             <div className="text-center title text-7xl mt-10">
                 <h1>Adolecentes y adultos</h1>  
             </div>
-            <br/>
-            <Menu_Bar/>
             <br/>
             <div className="paragraph m-10 text-2xl">
                 <p>

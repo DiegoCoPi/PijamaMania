@@ -2,7 +2,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Footer from "@/footer/footer";
+import Footer from "@/components/footer/footer";
+import Menu_Bar from "@/components/menu_bar/menu_bar";
+import MenuWrapper from "@/components/menuwrapper/menuwraper";
 
 /*const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,11 +26,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="es">
       <body
+        
         className="min-h-screen flex flex-col"
       >
+        <MenuWrapper/>
         <main className="flex-grow">{children}</main>
         <Footer/>
       </body>
