@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryColumn } from "typeorm";
 import { ProductInte } from "./products.interface";
-import { User } from "../user/user";
-import { Orders } from "../orders/orders";
+import { User } from "../user/user.entity";
+import { Orders } from "../orders/orders.entity";
 
 
 @Entity()

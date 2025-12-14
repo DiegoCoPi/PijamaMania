@@ -1,14 +1,18 @@
 import { ConflictException, Inject, Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { LoggingDTO } from "src/dto/logging";
 import { userDTO } from "src/dto/userDto";
-import { User } from "src/entities/user/user";
+import { User } from "src/entities/user/user.entity";
 import { Repository } from "typeorm";
 import * as bcrypt from 'bcrypt';
+import { JwtService } from "@nestjs/jwt";
+import { InjectRepository } from "@nestjs/typeorm";
 
 @Injectable()
 export class UserService{
-    constructor(@Inject('USER_REPOSITORY') private userRepository: Repository<User>){}
-
+    constructor(
+        @InjectRepository(User) 
+        private userRepository: Repository<User>,
+        private jwtservice:JwtService){}
 
     //Servidor para ver ussuarios
     async findAll():Promise<User[]>{
@@ -69,8 +73,6 @@ export class UserService{
         return "Usuario Eliminado correctamente"
 
     }
-
-
     // Servidor para logearse
     async loggingUser(data: LoggingDTO) {
         // Validación inicial
@@ -103,9 +105,20 @@ export class UserService{
             throw new UnauthorizedException("Usuario o contraseña no encontrada");
         }
 
+        //Generación del token para logearse
+        const userSign ={
+            idNumber:user.idNumber,
+            name:user.name,
+            lastname:user.lastname,
+        }
+        
+        const token = this.jwtservice.sign(userSign)
+
+
         // Devuelve usuario seguro
         return {
             message: 'Ingreso Exitoso',
+            access_token: token,
             user: {
                 idNumber: user.idNumber,
                 name: user.name,

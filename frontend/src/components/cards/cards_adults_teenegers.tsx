@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { Cards_Interface } from "./cards_interface"
 import Image from "next/image"
-import Size_Buttons from "@/sizes/size"
-import Buy_Button from "@/buttons/button_buy"
+import Size_Buttons from "@/components/sizes/size"
+import Buy_Button from "@/components/buttons/button_buy"
 
 const Cards_Adults_Teenegers=()=>{
     

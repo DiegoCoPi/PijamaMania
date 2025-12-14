@@ -1,6 +1,6 @@
 "use client";
-import Cards_Initial from "@/cards/cards_initial"
-import Menu_Bar from "@/menu_bar/menu_bar"
+import Cards_Initial from "@/components/cards/cards_initial"
+import Menu_Bar from "@/components/menu_bar/menu_bar"
 import { useRouter } from "next/navigation"
 
 function Initial (){
@@ -9,7 +9,6 @@ function Initial (){
     
     return(
         <div>
-            <Menu_Bar/>
             <div className="flex justify-center gap-20">
                 <h1 className="title">PIJAMAMANIA</h1>
             </div>

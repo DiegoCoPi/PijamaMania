@@ -13,10 +13,6 @@
     margin-top: 10px;
     font-size: 80px;
   }
-  .hover{
-    @apply hover:bg-[rgba(255,215,0,1)] hover:text-purple-900 px-4 py-2 rounded transition duration-300 cursor-pointer;
-  }
-
   .paragraph{
     font-family: "Irish Grover", cursive;
     -webkit-text-stroke: 1px yellow;   
@@ -32,6 +28,23 @@
     background-attachment: fixed;
     background-size: 100% 100%;
   }
+ 
+  .buttons {
+    background-color: orangered;
+    padding: 6px 20px;
+    border-radius: 15px;
+    color: gold;
+    justify-content: center;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+
+  .buttons:hover{
+    background-color: gold;
+    color:orangered
+  }
+
   
   .form-2 {
   background: linear-gradient(
@@ -75,10 +88,7 @@ body {
     background-attachment: fixed;
     background-size: 100% 100%;
   }
-  .buttons{
-    background-color: yellow;
-    -webkit-text-fill-color: red;
-  }
 
+  
 }
 

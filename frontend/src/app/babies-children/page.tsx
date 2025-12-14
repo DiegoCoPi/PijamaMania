@@ -1,6 +1,6 @@
 'use client'
-import Cards_Babies_Children from "@/cards/cards_babies_children"
-import Menu_Bar from "@/menu_bar/menu_bar"
+import Cards_Babies_Children from "@/components/cards/cards_babies_children"
+import Menu_Bar from "@/components/menu_bar/menu_bar"
 
 const BabiesChildren= ()=>{
     return(
@@ -10,8 +10,6 @@ const BabiesChildren= ()=>{
         <div className="text-center mt-8">
             <h1 className="title text-7xl">Bebes-niños y niñas</h1>
         </div>
-        <br/>
-        <Menu_Bar/>
         <br/>
         <div>
             <p className="paragraph m-10 text-2xl">

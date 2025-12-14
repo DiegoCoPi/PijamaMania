@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseModule } from './database/database.module';
+import { DataBaseModule } from './database/database.module';
 import { UserModule } from './users/user.module';
+import { TypeORMError } from 'typeorm';
 
 
 @Module({
@@ -11,7 +12,7 @@ import { UserModule } from './users/user.module';
     ConfigModule.forRoot({
       isGlobal:true,
     }),
-    DatabaseModule,
+    DataBaseModule,
     UserModule,
     //Aqui las otros modulos para agregarlo despues
  ],

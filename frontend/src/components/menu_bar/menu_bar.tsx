@@ -1,12 +1,20 @@
 "use client";
-import User_Icon from "@/user_icon/user_icon";
-//import BabiesChildren from "@/pijamas/babies_children/babies_children"
-import Link from "next/link"
+import User_Icon from "@/components/user_icon/user_icon";
 import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react";
 
 function Menu_Bar(){
 
     const router = useRouter()
+    const [user,setuser]=useState<any>()
+
+    useEffect(()=>{
+        const storeUser = localStorage.getItem("user");
+        if(storeUser){
+            setuser(JSON.parse(storeUser));
+        }
+    },[])
+    
 
     return(
         <nav className="flex justify-center">

@@ -1,9 +1,9 @@
 import { Column, Entity, JoinTable, OneToMany, PrimaryColumn } from "typeorm";
 import { UserInt } from "./user.interface";
-import { Orders } from "../orders/orders";
+import { Orders } from "../orders/orders.entity";
 
 
-@Entity()
+@Entity('users')
 export class User implements UserInt{
 
     @PrimaryColumn()

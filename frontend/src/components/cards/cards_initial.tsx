@@ -2,18 +2,17 @@
 import Image from "next/image";
 import { Cards_Interface } from "./cards_interface"
 import { useState } from "react"
-import Buy_Button from "@/buttons/button_buy"
-import Size_Buttons from "@/sizes/size"
+import Buy_Button from "@/components/buttons/button_buy"
+import Size_Buttons from "@/components/sizes/size"
 
-function Cards_Babies_Children() {
+function Cards_Initial() {
     const [cards, setCards] = useState<Cards_Interface[]>([
+        {img:"/pijamas/adults/Los_Simpsons.jpg", name: "Los Simpsons", price: 45500, stock:50,quantity: 0 },
+        {img:"/pijamas/babies/Elmo.jpg", name: "Elmo", price:47000, stock:50,quantity:0},
         {img:"/pijamas/children/Cerditos.jpg", name: "Cerditos", price:47000, stock:50,quantity:0},
         {img:"/pijamas/children/Mickey_Mouse.jpg", name: "Mickey Mouse",price:45800,stock:50,quantity:0},
-        {img:"/pijamas/children/Grinch.webp", name: "Grinch",price:45800,stock:50,quantity:0},
-        {img:"/pijamas/children/Intensamente.jpg", name: "Intensamente",price:45800,stock:50,quantity:0},
-        {img:"/pijamas/children/Mario_Bros.jpg", name: "Mario Bros",price:45800,stock:50,quantity:0},
-        {img:"/pijamas/children/Marvel.jpg", name: "Marvel",price:45800,stock:50,quantity:0},
-        {img:"/pijamas/children/Sonic.jpg", name: "Sonic",price:45800,stock:50,quantity:0},
+        {img:"/pijamas/adults/Messi_Inter_Mia.jpg", name: "Messi Inter Mia", price:47000, stock:50,quantity:0},
+        {img:"/pijamas/babies/Harry_Potter.jpg", name: "Harri Potter", price:47000, stock:50,quantity:0},
     ]);
 
     const [currentcards, setCurrentcards] = useState(0);
@@ -129,4 +128,4 @@ function Cards_Babies_Children() {
     )
 }
 
-export default Cards_Babies_Children
+export default Cards_Initial
