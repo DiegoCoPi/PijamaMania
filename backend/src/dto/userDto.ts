@@ -8,4 +8,5 @@ export class userDTO{
     address:string;
     password:string;
     confirm:string;
+    admin:false;
 }

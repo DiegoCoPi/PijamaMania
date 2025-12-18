@@ -28,9 +28,19 @@
     background-attachment: fixed;
     background-size: 100% 100%;
   }
+
+  {/*Botones de barar de menú*/}
+
+  .menu:hover{
+    background-color: gold;
+    color: blue;
+    border-radius: 4px;
+    user-select: none;
+    scale: calc(1.1);
+  }
  
   .buttons {
-    background-color: orangered;
+    background-color: rgb(65, 0, 145);
     padding: 6px 20px;
     border-radius: 15px;
     color: gold;
@@ -42,9 +52,20 @@
 
   .buttons:hover{
     background-color: gold;
-    color:orangered
+    color:rgb(65, 0, 145);
   }
 
+  .href-link:hover{
+    color: gold;
+    scale:calc(1.2);
+  }
+
+  .text-link:hover{
+    background-color: gold;
+    color: blueviolet;
+    border-radius: 8px;
+  }
+  
   
   .form-2 {
   background: linear-gradient(
@@ -69,6 +90,14 @@
   background-image: url('/buttoms/navidad_5.jpg')
 }
 
+.profile-form{
+  background-color: rgb(1, 99, 211);
+  color:azure;
+  width: max-content;
+  margin-top: 36px;
+  justify-content: center;
+  padding: 40px
+}
 /* Estilo global para el fondo del body */
 body {
   @apply m-0 min-h-screen;

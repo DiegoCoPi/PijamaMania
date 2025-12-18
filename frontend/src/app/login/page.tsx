@@ -1,5 +1,6 @@
 "use client";   
 import axios, { Axios } from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation"
 import { useState } from "react";
 
@@ -36,8 +37,6 @@ function LoginUser(){
         try {
             const response = await axios.post("http://localhost:3000/user/login",payload);
 
-            console.log("LOGIN RESPONSE 👉", response.data);
-            
             //Guardado de datos del ususario
             localStorage.setItem("user", JSON.stringify(response.data.user));
             localStorage.setItem("token", response.data.access_token);
@@ -89,41 +88,18 @@ function LoginUser(){
                             {error}
                         </p>
                         )}
-
                         {/* Botón */}
-                        <div className="flex justify-center">
-                        <button
-                            type="submit"
-                            className="buttons p-2 cursor-pointer hover:scale-110"
-                        >
-                            Acceder
-                        </button>
+                        <div className="flex justify-center mt-2">
+                            <button type="submit" className="buttons p-2 cursor-pointer hover:scale-110">
+                                Acceder
+                            </button>
                         </div>
-
                         {/* Links */}
-                        <div className="flex flex-row gap-10">
-                        <a
-                            onClick={() => router.push("/forgot-pass")}
-                            className="cursor-pointer hover:text-yellow-400"
-                        >
-                            ¿Olvidó su contraseña?
-                        </a>
-                        <a
-                            onClick={() => router.push("/user-form")}
-                            className="cursor-pointer hover:text-yellow-400"
-                        >
-                            Crea tu cuenta aquí
-                        </a>
+                        <div className="flex flex-row gap-8">
+                            <Link href="/forgot-pass" className="href-link">¿Olvido su contraseña?</Link>
+                            <Link href="/user-form" className="href-link">Crea tu cuenta</Link>
+                            <Link href="/" className="href-link">Volver a Inicio</Link>
                         </div>
-                        <div className="flex justify-center">
-                            <a
-                                onClick={()=>router.push("/")}
-                                className="cursor-pointer hover:text-yellow-400"
-                            >
-                                Volver al inicio
-                            </a>
-                        </div>
-
                     </div>
                     </form>
                 </div>
