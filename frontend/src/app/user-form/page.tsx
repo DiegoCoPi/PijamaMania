@@ -1,5 +1,7 @@
 "use client";
 import axios, { AxiosError } from "axios";
+import { Monofett } from "next/font/google";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { BiShow } from "react-icons/bi";
@@ -34,7 +36,23 @@ function CreateForm(){
             confpass:""
         })
 
-        //Mabejo de ocultar y mostrar contraseña
+
+        const isAdult = (birthdate: string): boolean => {
+            const today = new Date()
+            const birth = new Date(birthdate)
+
+            let age = today.getFullYear() - birth.getFullYear()
+            const monthDiff = today.getMonth() - birth.getMonth()
+
+            if (monthDiff < 0 ||(monthDiff === 0 && today.getDate() < birth.getDate())){
+                age--
+            }
+
+            return age >= 18
+        }
+
+
+            //Mabejo de ocultar y mostrar contraseña
         const [showPass, setShowPass]=useState(false)
         const [showConfpass, setShowConfpass]=useState(false)
 
@@ -64,28 +82,13 @@ function CreateForm(){
                 return
             }
 
-
-            //Validación de la edad
-
-            const birthDate = new Date(form.birthdate)
-            const today = new Date()
-
-            const birthyerar = birthDate.getFullYear();
-            const todayYear = today.getFullYear()
-
-            let age = todayYear-birthyerar
-            const monthDiff = today.getMonth() - birthDate.getMonth()
-
-            if(monthDiff<0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())){
-                age--;
-            }
-
-            if(age<18){
-                setError(prev=>({...prev, age:true}))
-                alert("Tienes que ser mayor de edad")
+            //Se calida la edad
+            if(!isAdult(form.birthdate)){
+                setError(prev =>({...prev, age:true}))
+                alert("Debe teener al menos 18 años de edad")
                 return
             }
-            
+
             //Comparar las contraseñas
             if(form.password !== form.confpass){
                 setError(prev =>({
@@ -102,228 +105,259 @@ function CreateForm(){
 
             try{
                 const response =await axios.post('http://localhost:3000/user',form)
-                
                 alert("El usuario ha sido creado exitosamente");
-            
             }
                 
             catch(error){
                 const axiosError = error as AxiosError;
                 if(axiosError.response?.status===409){
-                    alert("El usuario ya se encuantra registrado")
+                    alert("El usuario ya se encuentra registrado")
                 }
                 else{
                     alert("Error al crear el usuario"+axiosError.message)
                 }
             }
+                setForm({
+                    idNumber:"",
+                    name:"",
+                    lastname:"",
+                    birthdate:"",
+                    email:"",
+                    phone:"",
+                    address:"",
+                    password:"",
+                    confpass:""
+                })
 
-            alert("Cuenta creada exitosamente")
-
-
-            setForm({
-                idNumber:"",
-                name:"",
-                lastname:"",
-                birthdate:"",
-                email:"",
-                phone:"",
-                address:"",
-                password:"",
-                confpass:""
-            })
-
-            setError({
-                idNumber:false,
-                name:false,
-                lastname:false,
-                birthdate:false,
-                email:false,
-                age:false,
-                phone:false,
-                address:false,
-                password:false,
-                confpass:false
-            })
+                setError({
+                    idNumber:false,
+                    name:false,
+                    lastname:false,
+                    birthdate:false,
+                    email:false,
+                    age:false,
+                    phone:false,
+                    address:false,
+                    password:false,
+                    confpass:false
+                })
+            
 
     }
 
 
     return(
             <div>
-                <h1 className="title text-6xl">Bienvemidos al formulario de registro de usuarios</h1>
+                <h1 className="title text-6xl">Bienvenidos al formulario de registro de usuarios</h1>
                 {/*Aqui empieza el formulario*/}
                 <div className=" flex justify-center mt-[30px]">
-                    <form onSubmit={handleSubmit} className="form-bg text-yellow-400 p-8">
-                        {/*Casilla de Nombres, apellidos y fecha de nacimiento*/}
-                        <div className="flex flex-row gap-10">
-                            {/*Nombre*/}
-                            <div className="flex flex-row gap-[10px]">
-                                <label>Nombre(s):</label>
-                                <div className="flex flex-col gap-[1px]">
+                    <form onSubmit={handleSubmit} className="form-bg rounded-2xl text-yellow-400 p-8">
+                        {/*Columna 1 casillas de Nombres, apellidos, fecha de nacimiento*/}
+                        <div className="flex flex-row gap-5">
+                            <div className="flex flex-col">
+                                {/*Nombre(s)*/}
+                                <div className="space-x-7">
+                                    <label>Nombre(s):</label>
                                     <input
                                     type="text"
-                                    className={`bg-yellow-400 text-red-600 ${error.name ? "border-1":"border-green-600"}`}
                                     value={form.name}
-                                    onChange={(e)=>setForm({...form, name:e.target.value})}
+                                    onChange={(e)=>setForm({...form,name:e.target.value})}
+                                    placeholder="Ingrese su(s) nombre(s)"
+                                    className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
+                                    ${error.name? "border-2 border-[rgb(26,0,156)]":"border-transparent"}`}
                                     />
-                                    {error.name && (
-                                        <p className="text-xs">*Obligatorio</p>
-                                    )}
+                                    <div className="h-[30px]">
+                                        {error.name &&(
+                                            <p className="text-center text-xs">
+                                                <strong>Debe ingresar su(s) nombre(s)</strong>
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                            {/*Apellido*/}
-                            <div className="flex flex-row gap-[10px]">
-                                <label>Apellido(s):</label>
-                                <div className="flex flex-col gap-[1px]">
+                                {/*Apellidos*/}
+                                <div className="space-x-5">
+                                    <label>Apellidos(s):</label>
                                     <input
                                     type="text"
-                                    className={`bg-yellow-400 text-red-600 ${error.lastname ? "border-1":"border-green-600"}`}
                                     value={form.lastname}
                                     onChange={(e)=>setForm({...form, lastname:e.target.value})}
+                                    placeholder="Ingrese su(s) apellido(s)"
+                                    className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
+                                        ${error.lastname?"border-2 border-pink-400":"border-transparent"}`}
                                     />
-                                    {error.lastname && (
-                                        <p className="text-xs">*Obligatorio</p>
-                                    )}
+                                    <div className="h-[30px]">
+                                        {error.lastname &&(
+                                            <p className="text-center text-xs">
+                                                <strong>Ingrese su(s) apellido(s)</strong>
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                             {/*Fecha nacimiento*/}
-                            <div className="flex flex-row gap-[10px]">
-                                <label>Fecha nacimiento:</label>
-                                <div className="flex flex-col gap-[1px]">
+                                {/*Fecha de Nacimiento*/}
+                                <div className="space-x-3">
+                                    <label>F.Nacimiento:</label>
                                     <input
-                                    type="date"
-                                    className={`bg-yellow-400 text-red-600 ${error.birthdate ? "border-1":"border-green-600"}`}
+                                    type="Date"
                                     value={form.birthdate}
-                                    onChange={(e)=>setForm({...form, birthdate:e.target.value})}
+                                    onChange={(e)=>{
+                                        const value = e.target.value
+                                        setForm({...form, birthdate:value});
+                                        
+                                        if(!value){
+                                            setError(prev=>({...prev, birthdate:true, age:false}))
+                                        }
+
+                                        else if(!isAdult(value)){
+                                            setError(prev=>({...prev, birthdate:false, age:true}))
+                                        }
+                                        else{
+                                            setError(prev=>({...prev, birthdate:false, age:false}))
+                                        }
+                                    }}
+                                    className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
+                                    ${error.birthdate? "border-2 border-pink-400":"border-transparent"}`}
                                     />
-                                    {error.birthdate && (
-                                        <p className="text-xs">*Fecha incorrecta</p>
-                                    )}
-                                    {error.age && (
-                                        <p className="textt-xs">Tu edad no es permitida</p>
-                                    )}
+                                    <div className="h-[30px]">
+                                        {error.birthdate &&(
+                                            <p className="text-center text-xs">
+                                                <strong>Ingrese su fecha de nacimiento</strong>
+                                            </p>
+                                        )}
+                                        {error.age &&(
+                                            <p className="text-center text-xs">
+                                                <strong>Edad no permitida</strong>
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        {/*Casillas de documento, telefóno y dirección*/}
-                        <div className="mt-[25px] flex flex-row gap-[30px]">
-                            {/*Documento*/}
-                            <div className="flex flex-row gap-[30px]">
-                                <label>N° Documento:</label>
-                                <div>
-                                    <input
-                                    type="number"
-                                    className={`bg-yellow-400 text-red-600 ${error.idNumber ? "border-1":"border-green-600"}`}
-                                    value={form.idNumber}
-                                    onChange={(e)=>setForm({...form, idNumber:e.target.value})}
-                                    />
-                                    {error.idNumber && (
-                                        <p className="text-xs">Ingrese un umero de documento valido</p>
-                                    )}
-                                </div>
-                            </div> 
-                            {/*Telefóno */}
-                            <div className="flex flex-row gap-[30px]">
-                                <label>Telefóno:</label>
-                                <div>
-                                    <input
-                                    type="number"
-                                    className={`bg-yellow-400 text-red-600 ${error.phone ? "border-1":"border-green-600"}`}
-                                    value={form.phone}
-                                    onChange={(e)=>setForm({...form, phone:e.target.value})}
-                                    />
-                                    {error.phone && (
-                                        <p className="text-xs">Ingrese un numero telefónico valido</p>
-                                    )}
-                                </div>
-                            </div> 
-                            {/**Dirección */}
-                            <div className="flex flex-row gap-[20px]">
-                                <label>Dirección:</label>
-                                <div>
+                                {/*Documento*/}
+                                <div className="space-x-1">
+                                    <label>N° Documento:</label>
                                     <input
                                     type="text"
-                                    className={`bg-yellow-400 text-red-600 ${error.address ? "border-1":"border-green-600"}`}
+                                    value={form.idNumber}
+                                    placeholder="Ingrese N° documento"
+                                    onChange={(e)=>setForm({...form,idNumber:e.target.value })}
+                                    className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
+                                    ${error.idNumber ? "border-2 border-pink-400":"border-transparent"}`}/>
+                                    <div className="h-[30px]">
+                                        {error.idNumber&&(
+                                            <p className="text-center text-xs"><strong>Ingrese un número de documento</strong></p>
+                                        )}
+                                    </div>
+                                </div>
+                                {/*Télefóno*/}
+                                <div className="space-x-2">
+                                    <label>Núm. Teleóno:</label>
+                                    <input
+                                    type="text"
+                                    value={form.phone}
+                                    placeholder="Ingrese N° telefóno"
+                                    onChange={(e)=>setForm({...form,phone:e.target.value })}
+                                    className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
+                                    ${error.phone ? "border-2 border-pink-400":"border-transparent"}`}/>
+                                    <div className="h-[30px]">
+                                        {error.phone &&(
+                                            <p className="text-center text-xs">
+                                                <strong>Ingrese un número de documento</strong>
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                            {/*Columna 2 Correo, Dirección, contraseña y confirmación */}
+                            <div className="flex flex-col">
+                                {/*Dirección */}
+                                <div className="space-x-7">
+                                    <label>Dirección:</label>
+                                    <input
+                                    type="text"
                                     value={form.address}
+                                    placeholder="Ingrese su dirección"
                                     onChange={(e)=>setForm({...form,address:e.target.value})}
+                                    className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
+                                    ${error.address ? "border-2 border-pink-400":"border-transparent"}`}
                                     />
-                                    {error.address &&(<p className="text-xs">Dirección Invalida</p>)}
+                                    <div className="h-[30px]">
+                                        {error.address &&(
+                                            <p className="text-center text-xs">
+                                                <strong>Ingrese su dirección</strong>
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>        
-                        </div>
-                        {/*Correo, COntraseña y confirmación de contraseña*/}
-                        <div className="flex flex-row gap-[40px] mt-[28px]">
-                            {/*Correo*/}
-                            <div className="flex flex-row gap-[32px]">
-                                <label>Correo:</label>
-                                <div>
+                                {/*Correo */}
+                                <div className="space-x-11">
+                                    <label>Correo:</label>
                                     <input
-                                    type="email"
-                                    className={`bg-yellow-400 text-red-600 ${error.email ? "border-1":"border-green-600"}`}
+                                    type="text"
                                     value={form.email}
+                                    placeholder="Ingrese la dirección"
                                     onChange={(e)=>setForm({...form, email:e.target.value})}
+                                    className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
+                                    ${error.email ? "border-2 border-pink-400":"border-transparent"}`}
                                     />
-                                     {error.email && (<p className="text-xs">Correo no valido</p>)}
-                                </div>        
-                            </div>
-                             {/*Contraseña*/}
-                            <div className="flex flex-row gap-[7px]">
-                                <label>Contraseña:</label>
-                                <div className="relative flex flex-col">
+                                    <div className="h-[30px]">
+                                        {error.email &&(
+                                            <p className="text-center text-xs">
+                                                <strong>Ingrese un correo valido</strong>
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                                {/*Contraseña */}
+                                <div className="space-x-3">
+                                    <label>Contraseña:</label>
                                     <input
-                                    type={showPass ? "text":"password"}
-                                    className={`bg-yellow-400 text-red-600 ${error.email ? "border-1":"border-green-600"}`}
+                                    type="text"
                                     value={form.password}
+                                    placeholder="Ingrese la dirección"
                                     onChange={(e)=>setForm({...form, password:e.target.value})}
-                                    required
+                                    className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
+                                    ${error.password ? "border-2 border-pink-400":"border-transparent"}`}
                                     />
-                                    <BiShow
-                                        className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer text-red-600"
-                                        size={20}
-                                        onClick={() => setShowPass(!showPass)}
-                                    />
-                                    {error.password &&(<p className="text-xs">Contraseña no valida</p>)}
+                                    <div className="h-[30px]">
+                                        {error.password &&(
+                                            <p className="text-center text-xs">
+                                                <strong>Ingrese la contraseña valido</strong>
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                            {/*Confirmación*/}
-                            <div className="flex flex-row gap-[15px]">
-                                <label>Confirmar:</label>
-                                <div className="relative flex flex-col">
+                                {/*Confimación */}
+                                <div className="space-x-5">
+                                    <label>Confirmar:</label>
                                     <input
-                                        type={showConfpass ? "text" : "password"}
-                                        className={`bg-yellow-400 text-red-600 ${error.confpass ? "border-1":"border-green-600"}`}
-                                        value={form.confpass}
-                                        onChange={(e)=>setForm({...form, confpass:e.target.value})}
+                                    type="text"
+                                    value={form.confpass}
+                                    placeholder="Ingrese la dirección"
+                                    onChange={(e)=>setForm({...form, confpass:e.target.value})}
+                                    className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
+                                    ${error.confpass ? "border-2 border-pink-400":"border-transparent"}`}
                                     />
-
-                                    {/* Ícono centrado + corrección de estado */}
-                                    <BiShow
-                                        className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer text-red-600"
-                                        size={22}
-                                        onClick={() => setShowConfpass(!showConfpass)}
-                                    />
-
-                                    {error.confpass && (<p className="text-xs">Contraseña no coincide</p>)}
+                                    <div className="h-[30px]">
+                                        {error.confpass &&(
+                                            <p className="text-center text-xs">
+                                                <strong>Ingrese la contraseña valido</strong>
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="flex flex-row gap-8">
+                                    <Link href="/login" className="text-link">
+                                        ¿Usuario registrado?
+                                    </Link>
+                                    <Link href="/" className="text-link">
+                                        Volver a Inicio
+                                    </Link>
                                 </div>
                             </div>
-                        </div>      
-                        {/*Botones*/}
-                        <br/>
-                        <div className="flex flex-row gap-7 justify-center">
-                            <button
-                            type="submit"
-                            onClick={()=>router.push("/login")}
-                            className="bg-yellow-400 text-red-600 p-[8px] cursor-pointer hover:scale-115">
-                                Crear usuario
-                            </button>
-                            <button
-                            type="submit"
-                            onClick={()=>router.push("/")} 
-                            className="bg-yellow-400 text-red-600 p-[8px] cursor-pointer hover:scale-115">
-                                Cancelar
-                            </button>
                         </div>
-                    {/*Aqui termina el formulario*/}
+                        <div className="mt-0">
+                            <button onClick={()=>router.push("/")} type="submit" className="buttons">
+                                Crear Cuenta
+                            </button>
+                        </div>    
                     </form>
                 </div>                
             </div>

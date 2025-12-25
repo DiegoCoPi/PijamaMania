@@ -30,12 +30,8 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        
-        className="min-h-screen flex flex-col"
-      >
-        <MenuWrapper/>
+        className="min-h-screen flex flex-col">
         <main className="flex-grow">{children}</main>
-        <Footer/>
       </body>
     </html>
   );
