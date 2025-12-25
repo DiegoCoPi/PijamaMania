@@ -71,7 +71,7 @@ function Menu_Bar() {
               /> 
               
               {user ? (
-                <Link  href="/" className="cursor:pointer menu">
+                <Link  href="/profile" className="cursor:pointer menu">
                   Bienvenido {user.name} {user.lastname}
                 </Link>
               ):(
