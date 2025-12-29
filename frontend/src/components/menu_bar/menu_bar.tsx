@@ -3,6 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Drop_menu from "../dropdown-menu/dropdown-menu";
 
 interface JwtPayload {
   exp: number;
@@ -61,24 +62,7 @@ function Menu_Bar() {
           <li><Link href="/" className="menu text-xl">Inicio</Link></li>
           <li><Link href="/babies-children" className="menu text-xl">Bebés-niños y niñas</Link></li>
           <li><Link href="/teenegers-adults" className="menu text-xl">Adolescentes-Adultos</Link></li>
-          <li>
-            <div className="flex flex-row gap-[20px]">
-              <Image
-              src="/img/icono_usuario.png"
-              alt="usuario"
-              width={20}
-              height={20}
-              /> 
-              
-              {user ? (
-                <Link  href="/profile" className="cursor:pointer menu">
-                  Bienvenido {user.name} {user.lastname}
-                </Link>
-              ):(
-                <Link href="/login" className="cursor:pointer menu">Inicie sección</Link>
-              )}
-            </div>
-          </li>
+          <li><Drop_menu/></li>
         </ul>
       </div>
     </nav>
