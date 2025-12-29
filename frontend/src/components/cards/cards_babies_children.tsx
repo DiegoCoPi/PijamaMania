@@ -2,8 +2,8 @@
 import Image from "next/image";
 import { Cards_Interface } from "./cards_interface"
 import { useState } from "react"
-import Buy_Button from "@/components/buttons/button_buy"
 import Size_Buttons from "@/components/sizes/size"
+import Buy_Button from "../buttons/button-buy";
 
 function Cards_Babies_Children() {
     const [cards, setCards] = useState<Cards_Interface[]>([
@@ -105,9 +105,9 @@ function Cards_Babies_Children() {
                                             </button>
                                         </div>
                                     </div>
-                                    <br/>
-                                    <div className="mt-2">
-                                        <Buy_Button />
+                                    {/*Botón de compra */}
+                                    <div>
+                                        <Buy_Button/>
                                     </div>
                                 </div>
                             </div>

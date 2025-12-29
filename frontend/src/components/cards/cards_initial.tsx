@@ -2,8 +2,7 @@
 import Image from "next/image";
 import { Cards_Interface } from "./cards_interface"
 import { useState } from "react"
-import Buy_Button from "@/components/buttons/button_buy"
-import Size_Buttons from "@/components/sizes/size"
+
 
 function Cards_Initial() {
     const [cards, setCards] = useState<Cards_Interface[]>([
@@ -77,37 +76,6 @@ function Cards_Initial() {
                                         className="object-cover w-full h-[200px] rounded-lg"
                                     />
                                     <h2 className="mt-2 font-bold text-center text-3xl">{card.name}</h2>
-                                    <h3><strong>Talla:</strong> <Size_Buttons /></h3>
-                                    <h3><strong>Precio: $</strong>{card.price}</h3>
-                                    <div className="flex items-center space-x-2 mt-2">
-                                        <h3><strong>Cantidad:</strong></h3>
-                                        <div className="flex space-x-1 items-center hover:scale-110">
-                                            {/*Botón más*/ }
-                                            <button className="cursor-pointer" onClick={() => incrementClick(index)}>
-                                                <Image
-                                                    src="/signs/signo_mas.png"
-                                                    alt="signo_mas"
-                                                    height={22}
-                                                    width={22}
-                                                    className="bg-[rgba(255,215,0,1)]"
-                                                />
-                                            </button>
-                                            <h3 className="px-2 bg-purple-900 text-[rgba(255,215,0,1)] rounded"><strong>{card.quantity}</strong></h3>
-                                            <button className="cursor-pointer" onClick={() => decrementClick(index)}>
-                                                <Image
-                                                    src="/signs/signo_menos.png"
-                                                    alt="signo_menos"
-                                                    height={22}
-                                                    width={22}
-                                                    className="bg-[rgba(255,215,0,1)]"
-                                                />
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <br/>
-                                    <div className="mt-2">
-                                        <Buy_Button />
-                                    </div>
                                 </div>
                             </div>
                         ))}

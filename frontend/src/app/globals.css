@@ -29,6 +29,21 @@
     background-size: 100% 100%;
   }
 
+  {/*Boton de agregar al carro*/}
+
+  .car-button{
+    color:purple;
+    background-color: gold;
+    padding: 10px;
+    border-radius: 30px;
+    -ms-flex-align: center;
+  }
+
+  .car-button:hover{
+    scale: calc(1.2);
+    cursor: pointer;
+  }
+
   {/*Botones de barar de menú*/}
 
   .menu:hover{
@@ -39,22 +54,6 @@
     scale: calc(1.1);
   }
  
-  .buttons {
-    background-color: rgb(65, 0, 145);
-    padding: 6px 20px;
-    border-radius: 15px;
-    color: gold;
-    justify-content: center;
-    display: block;
-    margin: 0 auto;
-    cursor: pointer;
-  }
-
-  .buttons:hover{
-    background-color: gold;
-    color:rgb(65, 0, 145);
-  }
-
   .href-link:hover{
     color: gold;
     scale:calc(1.2);
