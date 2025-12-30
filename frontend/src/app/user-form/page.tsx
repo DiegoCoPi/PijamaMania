@@ -77,6 +77,13 @@ function CreateForm(){
 
             setError(newErrors)
 
+            if(error){
+                return
+            }
+            else{
+                router.push("/")
+            }
+
             if(Object.values(newErrors).includes(true)){
                 alert("Por favor diligencie todos los campos")
                 return
@@ -183,7 +190,7 @@ function CreateForm(){
                                     onChange={(e)=>setForm({...form, lastname:e.target.value})}
                                     placeholder="Ingrese su(s) apellido(s)"
                                     className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
-                                        ${error.lastname?"border-2 border-pink-400":"border-transparent"}`}
+                                        ${error.lastname?"border-2 border-[rgb(26,0,156)]":"border-transparent"}`}
                                     />
                                     <div className="h-[30px]">
                                         {error.lastname &&(
@@ -215,7 +222,7 @@ function CreateForm(){
                                         }
                                     }}
                                     className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
-                                    ${error.birthdate? "border-2 border-pink-400":"border-transparent"}`}
+                                    ${error.birthdate? "border-2 border-[rgb(26,0,156)]":"border-transparent"}`}
                                     />
                                     <div className="h-[30px]">
                                         {error.birthdate &&(
@@ -239,7 +246,7 @@ function CreateForm(){
                                     placeholder="Ingrese N° documento"
                                     onChange={(e)=>setForm({...form,idNumber:e.target.value })}
                                     className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
-                                    ${error.idNumber ? "border-2 border-pink-400":"border-transparent"}`}/>
+                                    ${error.idNumber ? "border-2 border-[rgb(26,0,156)]":"border-transparent"}`}/>
                                     <div className="h-[30px]">
                                         {error.idNumber&&(
                                             <p className="text-center text-xs"><strong>Ingrese un número de documento</strong></p>
@@ -255,7 +262,7 @@ function CreateForm(){
                                     placeholder="Ingrese N° telefóno"
                                     onChange={(e)=>setForm({...form,phone:e.target.value })}
                                     className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
-                                    ${error.phone ? "border-2 border-pink-400":"border-transparent"}`}/>
+                                    ${error.phone ? "border-2 border-[rgb(26,0,156)]":"border-transparent"}`}/>
                                     <div className="h-[30px]">
                                         {error.phone &&(
                                             <p className="text-center text-xs">
@@ -276,7 +283,7 @@ function CreateForm(){
                                     placeholder="Ingrese su dirección"
                                     onChange={(e)=>setForm({...form,address:e.target.value})}
                                     className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
-                                    ${error.address ? "border-2 border-pink-400":"border-transparent"}`}
+                                    ${error.address ? "border-2 border-[rgb(26,0,156)]":"border-transparent"}`}
                                     />
                                     <div className="h-[30px]">
                                         {error.address &&(
@@ -295,7 +302,7 @@ function CreateForm(){
                                     placeholder="Ingrese la dirección"
                                     onChange={(e)=>setForm({...form, email:e.target.value})}
                                     className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
-                                    ${error.email ? "border-2 border-pink-400":"border-transparent"}`}
+                                    ${error.email ? "border-2 border-[rgb(26,0,156)]":"border-transparent"}`}
                                     />
                                     <div className="h-[30px]">
                                         {error.email &&(
@@ -314,7 +321,7 @@ function CreateForm(){
                                     placeholder="Ingrese la dirección"
                                     onChange={(e)=>setForm({...form, password:e.target.value})}
                                     className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
-                                    ${error.password ? "border-2 border-pink-400":"border-transparent"}`}
+                                    ${error.password ? "border-2 border-[rgb(26,0,156)]":"border-transparent"}`}
                                     />
                                     <div className="h-[30px]">
                                         {error.password &&(
@@ -333,7 +340,7 @@ function CreateForm(){
                                     placeholder="Ingrese la dirección"
                                     onChange={(e)=>setForm({...form, confpass:e.target.value})}
                                     className={`bg-[gold] text-pink-600 rounded-[5px] p-[1px]
-                                    ${error.confpass ? "border-2 border-pink-400":"border-transparent"}`}
+                                    ${error.confpass ? "border-2 border-[rgb(26,0,156)]":"border-transparent"}`}
                                     />
                                     <div className="h-[30px]">
                                         {error.confpass &&(
@@ -354,7 +361,8 @@ function CreateForm(){
                             </div>
                         </div>
                         <div className="mt-0">
-                            <button onClick={()=>router.push("/")} type="submit" className="buttons">
+                            <button type="submit" className="buttons cursor-pointer bg-yellow-400 text-pink-600 p-2 rounded-3xl
+                                    hover:text-yellow-400 hover:bg-purple-800 hover:scale-110">
                                 Crear Cuenta
                             </button>
                         </div>    

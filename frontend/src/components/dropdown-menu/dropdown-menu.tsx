@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface User {
   id: number;
@@ -19,70 +20,49 @@ export default function DropMenu({ user }: Props) {
   return (
     <div className="relative">
       {/* Botón */}
-      <span
-        onClick={() => setOpen(prev => !prev)}
-        className="cursor-pointer text-yellow-400 select-none"
-      >
+
+      <span onClick={() => setOpen(prev => !prev)} className="cursor-pointer text-yellow-400 select-none">
         {user ? `Hola, ${user.name} ▾` : "Accede a tu cuenta ▾"}
       </span>
-
-      {/* Menú */}
-      {open && (
-        <div className="absolute top-full mt-2 bg-white text-black rounded-lg shadow-lg w-48 z-50">
-          <ul className="flex flex-col">
-            {user ? (
+      {open &&(
+        <div className="absolute bg-yellow-400 text-blue-500 p-2 w-40 rounded-xl">
+          
+          <ul>
+            {user?(
               <>
-                <li>
-                  <Link
-                    href="/profile"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                  >
-                    Perfil
-                  </Link>
+                <li className="block hover:bg-blue-500 hover:text-yellow-400 p-1">
+                  <Link href="/profile">Perfil</Link>
                 </li>
                 <li>
-                  <Link
-                    href="/buy-car"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                  >
-                    Carrito de compras
-                  </Link>
+                  <Link href="/">Cerrar Sección</Link>
                 </li>
-                <li>
-                  <button
-                    onClick={() => {
-                      localStorage.clear();
-                      location.reload();
-                    }}
-                    className="text-left px-4 py-2 hover:bg-gray-100"
-                  >
-                    Cerrar sesión
-                  </button>
+                <li className="block hover:bg-blue-500 hover:text-yellow-400 p-1">
+                  <div className="flex flex-row">
+                    <Image
+                      src="/signs/anadir-al-carrito.png"
+                      alt="carrito"
+                      height={20}
+                      width={20}
+                      />
+                    <Link href="/buy-car">Compras</Link>
+                  </div>
                 </li>
               </>
-            ) : (
+            ):(
               <>
-                <li>
-                  <Link
-                    href="/login"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                  >
-                    Iniciar sesión
+                <li className="block hover:bg-blue-500 hover:text-yellow-400 p-1">
+                  <Link href="/login" className="block">
+                    Acceder
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="/user-form"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                  >
-                    Crear cuenta
-                  </Link>
+                <li className="block hover:bg-blue-500 hover:text-yellow-400 p-1">
+                  <Link href="/user-form">Crear Cuenta</Link>
                 </li>
               </>
             )}
           </ul>
         </div>
       )}
-    </div>
+    </div> 
   );
 }
