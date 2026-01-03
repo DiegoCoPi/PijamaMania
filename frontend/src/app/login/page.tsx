@@ -8,10 +8,6 @@ function LoginUser(){
     
     const router = useRouter()
 
-    /*const[email, setEmail]=useState("")
-    const[phone, setPhone]=useState("")
-    const[pass, setPass]=useState(false)*/
-
     const[form,setForm]=useState({
         identifier:"",
         password:""
@@ -40,6 +36,7 @@ function LoginUser(){
             //Guardado de datos del ususario
             localStorage.setItem("user", JSON.stringify(response.data.user));
             localStorage.setItem("token", response.data.access_token);
+            localStorage.setItem("idNumber", response.data.access_token);
             router.push("/");
         } 
         catch (error) {

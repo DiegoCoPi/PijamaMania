@@ -1,116 +1,73 @@
 "use client";
+import { AuthToken } from "@/components/auth/auth";
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { json } from "stream/consumers";
 
-// ¡IMPORTANTE!: Asegúrate que diga 'next/navigation'
-import { useRouter } from "next/navigation"; 
-import Cards_Initial from "@/components/cards/cards_initial"
-import { useEffect, useState } from "react";
-import Loading_gadet from "../loading";
+interface User{
+    idNumber:number,
+    name:string,
+    lastname:string,
+    birthdate:string,
+    email:string,
+    phone:number,
+    address:string,
+    password:string,
+    confpass:string,       
+}
 
-/*interface User{
-    idNumber:number;
-    name:string;
-    lastname:string;
-    phone:number;
-}*/
-export default function Profileborad() {
+export default function UserProfile(){
+
+    //Constantes de ruta, ussuario y de carga
     const router = useRouter()
-    /*
-    //Variables que guardan si el ussuario ha ingresado a su cuenta junto con sus datos
-    const[loading, setLoading] = useState(true)
-    const[userData, setUserData] =useState<User | null>(null)
+    const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(false)
 
-    useEffect(()=>{
-        
+   useEffect(()=>{
+
+        //Llamar la función de verificación del toke y traer los datos del usuario  desde la BD
+        const storedUser = localStorage.getItem("user")
         const token = localStorage.getItem("token")
 
-        if(!token){
-           // router.push("/login")
-            return 
+        if(!AuthToken() || !storedUser){
+            alert("Usuario no registrado")
+            router.push("/login")
+            return
         }
 
-        //Constante para traer los datos desde la bases
-        
-        const userFetch = async()=>{
+        const {idNumber}= JSON.parse(storedUser)
+
+        //Fetch desde el backend
+
+        const fetchUser= async()=>{
+
             try{
-                const response = await fetch(`http://localhost:3000/user/${idNumber}`,{
-                    method:"GET",
+                
+                const res = await fetch(`http://localhost:3000/user/${idNumber}`,{
                     headers:{
-                        "Content-Type": "application/json",
-                        // Enviamos el token para que el backend sepa quién es el usuario
-                        "Authorization": `Bearer ${token}`
+                        Autorization:`Bearer ${token}`
                     }
                 })
+                if(!res.ok) throw new Error("usuario no autorizado")
 
-                if(response.ok){
-                    const data:User = await response.json()
-                    setUserData(data)   
-                }
-                else{
-                    localStorage.removeItem("token")
-                    //router.push("/login")
-                }
+                const data = await res.json();
+                setUser(data);
             }
-            catch (error){
-                console.error("Error al traer datos:", error);
-            } finally {
-                setLoading(false);
+            catch{
+                localStorage.clear()
+                router.push("/login")
             }
-        };
-        userFetch();
-    },[router])
+            finally{
+                setLoading(false)
+            }
 
-    if(loading){
-        return <Loading_gadet/>
-    }*/
-
-    return (
-        <>
-            <h2 className="title">Perfil del usuario</h2>
-            <div className="flex justify-center">
-                <form className="profile-form">
-                    {/*Columna 1 Nombres y Apellidos */}
-                    <div className="flex flex-col gap-4">
-                        {/*Nombres */}
-                        <div className="flex gap-4">
-                            <label>Nombre(s):</label>
-                            <input
-                            type="text"
-                            //value={userData?.name}
-                            className="bg-white"
-                            //onChange={(e)=>setUserData({...userData!,name:e.target.value})}
-                            />
-                            {/*!userData?.name &&(
-                                <p>Debe ingresar un nombre por lo menos </p>
-                            )*/}
-                        </div>
-                        {/*Apellidos*/}
-                        <div className="flex gap-4">
-                            <label>Apellido(s):</label>
-                             <input
-                            type="text"
-                            className="bg-white"
-                            />
-                        </div>
-                    </div>
-                    {/*Columna 2*/}
-                    <div>
-                        <div>
-                        </div>               
-                    </div>
-                    <br/>
-                    {/*Botones */}
-                    <div className="flex flex-row gap-30">
-                         <button onClick={()=>router.push("/")}
-                            className="bg-white text-blue-800 cursor-pointer">
-                            Modificar
-                        </button>
-                        <button onClick={()=>router.push("/")}
-                            className="bg-white text-blue-800 cursor-pointer">
-                            Volver a Inicio
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </>
-    );
+        }
+        fetchUser()
+   },[router])
+    
+    return(
+        <div>
+            
+        </div>
+    )
 }
