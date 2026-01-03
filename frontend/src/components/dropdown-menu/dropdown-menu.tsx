@@ -1,28 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 interface User {
-  id: number;
+  idNumber: number;
   name: string;
   lastname: string;
 }
 
-interface Props {
-  user: User | null;
-}
 
-export default function DropMenu({ user }: Props) {
+export default function DropMenu() {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null)
+
+  useEffect(()=>{
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  },[])
 
   return (
     <div className="relative">
       {/* Botón */}
 
       <span onClick={() => setOpen(prev => !prev)} className="cursor-pointer text-yellow-400 select-none">
-        {user ? `Hola, ${user.name} ▾` : "Accede a tu cuenta ▾"}
+        {user ? `Hola, ${user.name} ${user.lastname} ▾` : "Accede a tu cuenta ▾"}
       </span>
       {open &&(
         <div className="absolute bg-yellow-400 text-blue-500 p-2 w-40 rounded-xl">
@@ -33,8 +38,11 @@ export default function DropMenu({ user }: Props) {
                 <li className="block hover:bg-blue-500 hover:text-yellow-400 p-1">
                   <Link href="/profile">Perfil</Link>
                 </li>
-                <li>
-                  <Link href="/">Cerrar Sección</Link>
+                <li onClick={()=>{
+                    localStorage.removeItem("user") 
+                    setUser(null)
+                  }}>
+                  Cerrar Sección
                 </li>
                 <li className="block hover:bg-blue-500 hover:text-yellow-400 p-1">
                   <div className="flex flex-row">

@@ -75,16 +75,9 @@ function CreateForm(){
                 age:false,
             }
 
-            setError(newErrors)
-
-            if(error){
-                return
-            }
-            else{
-                router.push("/")
-            }
 
             if(Object.values(newErrors).includes(true)){
+                setError(newErrors)
                 alert("Por favor diligencie todos los campos")
                 return
             }
@@ -111,8 +104,9 @@ function CreateForm(){
             //Aqui se incorpora el axios de la pagina web
 
             try{
-                const response =await axios.post('http://localhost:3000/user',form)
+                await axios.post('http://localhost:3000/user',form)
                 alert("El usuario ha sido creado exitosamente");
+                router.push("/login")
             }
                 
             catch(error){
@@ -362,7 +356,8 @@ function CreateForm(){
                         </div>
                         <div className="mt-0">
                             <button type="submit" className="buttons cursor-pointer bg-yellow-400 text-pink-600 p-2 rounded-3xl
-                                    hover:text-yellow-400 hover:bg-purple-800 hover:scale-110">
+                                    hover:text-yellow-400 hover:bg-purple-800 hover:scale-110"
+                                    >
                                 Crear Cuenta
                             </button>
                         </div>    

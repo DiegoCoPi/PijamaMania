@@ -70,7 +70,7 @@ function Menu_Bar() {
               width={25}
               height={25}
               />
-              <DropMenu user={null}/>
+              <DropMenu/>
             </div>
           </li>
         </ul>
