@@ -4,7 +4,6 @@ export function AuthToken(): boolean {
   const token = localStorage.getItem("token");
 
   if (!token) {
-    alert("Usuario no reconocido")
     localStorage.clear()
     return false;
   }
