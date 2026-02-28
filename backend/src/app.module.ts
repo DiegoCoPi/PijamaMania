@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DataBaseModule } from './database/database.module';
 import { UserModule } from './users/user.module';
 import { TypeORMError } from 'typeorm';
+import { ProductsModule } from './products/product.module';
 
 
 @Module({
@@ -14,7 +15,7 @@ import { TypeORMError } from 'typeorm';
     }),
     DataBaseModule,
     UserModule,
-    //Aqui las otros modulos para agregarlo despues
+    ProductsModule
  ],
  controllers:[AppController],
  providers:[AppService]
