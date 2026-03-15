@@ -1,20 +1,17 @@
 import { Category, Type } from "src/enum/product.enum";
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn } from "typeorm";
 
 
 @Entity('products')
 export class Product{
 
-    @PrimaryGeneratedColumn()
-    id!:number
-
-    @Column({type:'varchar', length:25, unique:true})
+    @PrimaryColumn({type:"varchar", length:13})
     code!:number
 
-    @Column({type:'varchar', length:25, unique:true})
+    @Column({type:'varchar', length:25})
     name!:string
 
-    @Column({type:'varchar', length:25, unique:true})
+    @Column({type:'varchar', length:250})
     img!:string
 
     @Column({type:'enum', enum: Category})

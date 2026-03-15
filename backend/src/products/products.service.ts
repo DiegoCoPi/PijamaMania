@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Catch, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Product } from "src/entities/products.entity";
 import { Repository } from "typeorm";
@@ -13,48 +13,77 @@ export class ProductService{
     //Crear un nuevo producto
     async newProduct(productData:Partial<Product>):Promise<Product>{
 
-        const product = this.productRepository.create(productData)
-        return await this.productRepository.save(product)
+        try{
+            const product = this.productRepository.create(productData)
+            return await this.productRepository.save(product)
+        }
+        catch(error){
+            console.error(error)
+            throw new BadRequestException("Error al crear el producto")
+        }
     }
 
     //Listado de todos los productos
     async allProduct(){
-        return await this.productRepository.find()
+        try{
+            return await this.productRepository.find()
+        }
+        catch(error){
+            console.error(error)
+            throw new BadRequestException("Error al encontrar la lista de productos")
+        }
+        
     }
 
     //Encontrar un producto
     async oneProduct(code:number):Promise<Product>{
-        const product = await this.productRepository.findOneBy({code})
-        
-        if(!product){throw new BadRequestException('Producto no existe')}
+        try{
+            const product = await this.productRepository.findOneBy({code})
+            
+            if(!product){throw new BadRequestException('Producto no existe')}
 
-        return product
-
+            return product
+        }
+        catch(error){
+            console.error(error)
+            throw new BadRequestException("Error al registrar el producto")
+        }
     }
 
     //Modificar datos de producto
     async modifyProduct(code:number, updateData:Partial<Product>){
         
-        const product = await this.productRepository.findOneBy({code})
+        try{
+            const product = await this.productRepository.findOneBy({code})
+    
+            if(!product){
+                throw new BadRequestException("Producto no disponible")
+            }
 
-        if(!product){
-            throw new BadRequestException("Producto no disponible")
+            Object.assign(product,updateData)
+
+            return this.productRepository.save(product)
         }
-
-        Object.assign(product,updateData)
-
-        return this.productRepository.save(product)
-
+        catch(error){
+            console.error(error)
+            throw new BadRequestException("No s epudo modificar los datos")
+        }
     }
 
     //Eliminar un producto
     async deleteProduct(code:number){
-        const product = await this.productRepository.findOneBy({code})
-        
-        if(!product){throw new BadRequestException('Producto no se encuentra en el inventario')}
-        
-        return this.productRepository.delete(product)
+
+        try{
+            const product = await this.productRepository.findOneBy({code})
             
+            if(!product){throw new BadRequestException('Producto no se encuentra en el inventario')}
+            
+            return this.productRepository.delete(product)
+        }
+        catch(error){
+            console.error(error)
+            throw new BadRequestException("Error al borrar el producto")
+        }
     }
 
 }   
