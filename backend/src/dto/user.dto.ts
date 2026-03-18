@@ -1,4 +1,4 @@
-import { IsAlphanumeric, IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsAlphanumeric, IsEmail, IsNotEmpty, IsNumber, IsString, MinDate, MinLength } from "class-validator";
 
 
 export class userDTO{
@@ -20,8 +20,8 @@ export class userDTO{
     typeID!:string
 
     @IsNotEmpty()
-    @IsAlphanumeric()
-    numberID!:String
+    @IsString()
+    numberID!:string
 
     @IsNotEmpty()
     @IsString()
@@ -32,6 +32,7 @@ export class userDTO{
     email!:string
 
     @IsNotEmpty()
+    @MinLength(8)
     @IsString()
     password!:string
 
