@@ -21,10 +21,6 @@ export class userDTO{
 
     @IsNotEmpty()
     @IsString()
-    numberID!:string
-
-    @IsNotEmpty()
-    @IsString()
     address!:string
 
     @IsNotEmpty()
@@ -39,5 +35,4 @@ export class userDTO{
     @IsNotEmpty()
     @IsString()
     confirmPass!:string
-
 }
