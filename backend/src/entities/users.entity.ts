@@ -15,10 +15,7 @@ export class User{
 
     @Column()
     typeID!:string
-    
-    @Column()
-    numberID!:String
-    
+
     @Column()
     address!:string
     

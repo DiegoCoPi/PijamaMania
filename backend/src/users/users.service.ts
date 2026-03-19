@@ -64,5 +64,38 @@ export class UserService {
         }
     }
 
-    //
+    //Cambiar datos de un usuario
+
+    async changeUser(updateData:Partial<User>, id:number):Promise<User>{
+        try{
+
+            //Veridicar si el ussuario existe
+            const user = await this.userRepository.findOneBy({id})
+            if(!user){throw new BadRequestException("Usuario no se encuentra registrado")}
+
+            // Validar contraseña si viene
+            if (updateData.password) {
+                
+                if (updateData.password !== updateData.confirmPass) {
+                    throw new BadRequestException("Las contraseñas no coinciden");
+                }
+                updateData.password = await bcrypt.hash(updateData.password, 10);
+            }
+
+            //Eliminar la confirmación de la contraseña
+            delete(updateData.confirmPass)
+
+            //Mezclar los datos
+            const updateUser = await this.userRepository.merge(user, updateData) 
+
+            return this.userRepository.save(updateUser)
+            
+        }
+        catch{
+            throw new BadRequestException("Errror al actualizar dato(s)")
+        }
+    }
+
+    //Logging (Acceso de cuenta)
+    
 }
