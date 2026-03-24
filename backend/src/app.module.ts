@@ -11,6 +11,7 @@ import { ProductsModule } from './products/products.module';
  imports:[
     ConfigModule.forRoot({
       isGlobal:true,
+      envFilePath:'.env'
     }),
     DataBaseModule,
     ProductsModule   

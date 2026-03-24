@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Delete, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "src/entities/users.entity";
 import { Repository } from "typeorm";
@@ -92,10 +92,61 @@ export class UserService {
             
         }
         catch{
-            throw new BadRequestException("Errror al actualizar dato(s)")
+            throw new BadRequestException("Error al actualizar dato(s)")
         }
     }
 
     //Logging (Acceso de cuenta)
+    async loggingUser(loggingData:Partial<User>){
+        try{
+            //verificación de ususario
+            
+            if(!loggingData.email || !loggingData.phone){
+                throw new BadRequestException("Se requiere de este dato para poder acceder")
+            }
+
+            const userLog = await this.userRepository.findOne({
+                where:[
+                    {email:loggingData.email},
+                    {phone:loggingData.phone}
+                ]
+            })
+
+            if(!userLog){
+                throw new BadRequestException("Usuario no encontrado")
+            }
+
+            //Comparación de contraseña
+           const isMatch = await bcrypt.compare(loggingData.password!, userLog.password!)
+            if(!isMatch){
+                throw new BadRequestException("Usuario y/o contraseña incorrectas")
+            }
+
+            return {message:"Ingreso exitoso. Bienvenido", name:loggingData.name +" "+loggingData.lastname}
+
+          
+        }
+        catch{
+            throw new BadRequestException("Error al ingresar el ususario")
+        }
+    }  
+
+    //Eliminar usuario
+    async deleteUser(id:number){
+        try{
+            const user = await this.userRepository.findOneBy({id})
+            if(!user){
+                throw new NotFoundException("Usuario no se encuentra registrado")
+            }
+
+            this.userRepository.delete(user)
+
+            return "Usuario eliminado correctamente"    
+        }
+        catch{
+            throw new BadRequestException("Error al eliminar ususario")
+        }
+    }
     
 }
+

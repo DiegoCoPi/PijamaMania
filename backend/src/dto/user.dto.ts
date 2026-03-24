@@ -24,6 +24,10 @@ export class userDTO{
     address!:string
 
     @IsNotEmpty()
+    @IsNumber()
+    phone!:number
+
+    @IsNotEmpty()
     @IsEmail()
     email!:string
 

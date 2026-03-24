@@ -18,6 +18,9 @@ export class User{
 
     @Column()
     address!:string
+
+    @Column()
+    phone!:number
     
     @Column()
     email!:string
