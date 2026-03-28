@@ -66,11 +66,11 @@ export class UserService {
 
     //Cambiar datos de un usuario
 
-    async changeUser(updateData:Partial<User>, id:number):Promise<User>{
+    async changeUser(updateData:Partial<User>):Promise<User>{
         try{
 
             //Veridicar si el ussuario existe
-            const user = await this.userRepository.findOneBy({id})
+            const user = await this.userRepository.findOneBy({id:updateData.id})
             if(!user){throw new BadRequestException("Usuario no se encuentra registrado")}
 
             // Validar contraseña si viene
