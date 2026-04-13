@@ -15,29 +15,43 @@ export class UserService {
 
     //Crear un nuevo usuario
     async addUser(userData:Partial<User>):Promise<User>{
+        try{
+            const {password, confirmPass, ...rest} = userData
+
+            //Validación de usuario existente 
+            const user = await this.userRepository.findOneBy({id:rest.id})
+
+            if(user){
+                throw new BadRequestException("Usuario ya se encuentra registrado")
+            }
+
+            //Validar que todos los datos se encuentren diligenciados
+            if(!rest.id || !rest.name || !rest.lastname || !rest.email || !rest.typeID || !rest.address || !rest.phone){
+                throw new BadRequestException("Por favor diligenciar todos los datos")
+            }
+
+            //Validacion de contraseña existente
+            if(!password){throw new BadRequestException("Contraseña requerida")}
+
+            //Validación de password y confirmación
+            if(password !== confirmPass){throw new BadRequestException("Las contraseñas no coinciden")}
+
+            
         
-        const {password, confirmPass, ...rest} = userData
+            //Encriptación de la contraseña
+            const hashedPass = await bcrypt.hash(password,10)
 
-        //Validación de usuario existente 
-        const user = await this.userRepository.findOneBy({id:rest.id})
+            const newUser = await this.userRepository.create({
+                ...rest,
+                password:hashedPass,
+                confirmPass:hashedPass,
+            })
 
-        if(user){throw new BadRequestException("Usuario ya se encuantra registrado")}
-
-        //Validacion de contraseña existente
-        if(!password){throw new BadRequestException("Contraseña requerida")}
-
-        //Validación de password y confirmación
-        if(password !== confirmPass){throw new BadRequestException("Las contraseñas no coinciden")}
-       
-        //Encriptación de la contraseña
-        const hashedPass = await bcrypt.hash(password,10)
-
-        const newUser = await this.userRepository.create({
-            ...rest,
-            password:hashedPass,
-        })
-
-        return await this.userRepository.save(newUser)
+            return await this.userRepository.save(newUser)
+        }
+        catch(error){
+            throw new BadRequestException("Error al crear ususario, por favor verifica los datos ingresados")
+        }
     }
 
     //Lista de usuarios

@@ -20,6 +20,17 @@ export class UserController{
         }
     }
 
+    //Ingreso de credenciales
+    @Post(':login')
+    async insideUser(@Body() loggingData:Partial<User>){
+        const logging = await this.userService.loggingUser(loggingData)
+        return{
+            message: "Ingreso exitoso",
+            logging
+        }
+    }
+
+
     //Listado de ususarios
     @Get()
     async listUser(){
@@ -33,13 +44,14 @@ export class UserController{
     }
 
     //Cambio de datos de ususario
-    @Put()
+    @Put(':id')
     async changeDataUser(@Body("id") id:Partial<User>){
         return await this.userService.changeUser(id)
     }
 
+
     //Eliminación de ususarios
-    @Delete()
+    @Delete(':id')
     async lessUser(@Param("id") id:number){
         return await this.userService.deleteUser
     }

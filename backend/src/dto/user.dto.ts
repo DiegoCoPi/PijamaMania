@@ -32,11 +32,12 @@ export class userDTO{
     email!:string
 
     @IsNotEmpty()
-    @MinLength(8)
+    @MinLength(10)
     @IsString()
     password!:string
 
     @IsNotEmpty()
+    @MinLength(10)
     @IsString()
     confirmPass!:string
 }
