@@ -15,39 +15,52 @@ export class UserService {
 
     //Crear un nuevo usuario
     async addUser(userData:Partial<User>):Promise<User>{
-        
-        const {password, confirmPass, ...rest} = userData
-
-        //Validación de usuario existente 
-        const user = await this.userRepository.findOneBy({id:rest.id})
-
-        if(user){throw new BadRequestException("Usuario ya se encuantra registrado")}
-
-        //Validacion de contraseña existente
-        if(!password){throw new BadRequestException("Contraseña requerida")}
-
-        //Validación de password y confirmación
-        if(password !== confirmPass){throw new BadRequestException("Las contraseñas no coinciden")}
        
-        //Encriptación de la contraseña
-        const hashedPass = await bcrypt.hash(password,10)
+            const {password, confirmPass, ...rest} = userData
 
-        const newUser = await this.userRepository.create({
-            ...rest,
-            password:hashedPass,
-        })
+            //Validación de usuario existente 
+            const user = await this.userRepository.findOneBy({id:rest.id})
 
-        return await this.userRepository.save(newUser)
+            if(user){
+                throw new BadRequestException("Usuario ya se encuentra registrado")
+            }
+
+            //Validar que todos los datos se encuentren diligenciados
+            if(!rest.id || !rest.name || !rest.lastname || !rest.email || !rest.typeID || !rest.address || !rest.phone){
+                throw new BadRequestException("Por favor diligenciar y verificar todos los datos")
+            }
+
+            //Validacion de contraseña existente
+            if(!password){throw new BadRequestException("Contraseña requerida")}
+
+            //Validación de password y confirmación
+            if(password !== confirmPass){throw new BadRequestException("Las contraseñas no coinciden")}
+
+            
+        
+            //Encriptación de la contraseña
+            const hashedPass = await bcrypt.hash(password,10)
+
+            const newUser = await this.userRepository.create({
+                ...rest,
+                password:hashedPass,
+                confirmPass:hashedPass,
+            })
+
+            return await this.userRepository.save(newUser)
+        
     }
 
     //Lista de usuarios
     async allUser(){
-        try{
-            return await this.userRepository.find()
+
+        const list = await this.userRepository.find()
+        
+        if(!list){
+            throw new BadRequestException("Usuarios no registrados")
         }
-        catch{
-            throw new BadRequestException("Error al obtener lista de usuarios")
-        }
+        return list 
+        
     }
 
     //Obtener un usuario espécifico
@@ -98,22 +111,23 @@ export class UserService {
 
     //Logging (Acceso de cuenta)
     async loggingUser(loggingData:Partial<User>){
-        try{
+        
             //verificación de ususario
             
-            if(!loggingData.email || !loggingData.phone){
-                throw new BadRequestException("Se requiere de este dato para poder acceder")
+            if(!loggingData.email && !loggingData.phone){
+                throw new BadRequestException("Se requiere correo electrónico o numero de telefono para ingresar")
             }
 
-            const userLog = await this.userRepository.findOne({
-                where:[
-                    {email:loggingData.email},
-                    {phone:loggingData.phone}
-                ]
-            })
+            if(!loggingData.password){
+                throw new BadRequestException("La contraseña es requerida");
+            }
 
+            const whereCondition = loggingData.email ?{email:loggingData.email}:{phone:loggingData.phone}
+            
+            const userLog = await this.userRepository.findOne({where:whereCondition})
+            
             if(!userLog){
-                throw new BadRequestException("Usuario no encontrado")
+                throw new BadRequestException("Usuario y/o contraseña incorrectas")
             }
 
             //Comparación de contraseña
@@ -122,13 +136,7 @@ export class UserService {
                 throw new BadRequestException("Usuario y/o contraseña incorrectas")
             }
 
-            return {message:"Ingreso exitoso. Bienvenido", name:loggingData.name +" "+loggingData.lastname}
-
-          
-        }
-        catch{
-            throw new BadRequestException("Error al ingresar el ususario")
-        }
+            return {message:"Ingreso exitoso. Bienvenido", name:loggingData.name +" "+loggingData.lastname, isMatch}
     }  
 
     //Eliminar usuario
