@@ -23,10 +23,9 @@ export class UserController{
     //Ingreso de credenciales
     @Post(':login')
     async insideUser(@Body() loggingData:Partial<User>){
-        const logging = await this.userService.loggingUser(loggingData)
+        await this.userService.loggingUser(loggingData)
         return{
             message: "Ingreso exitoso",
-            logging
         }
     }
 
