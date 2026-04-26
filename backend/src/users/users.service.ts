@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "src/entities/users.entity";
 import { Repository } from "typeorm";
 import * as bcrypt from "bcrypt"
+import { JwtService } from "@nestjs/jwt";
 
 
 @Injectable()
@@ -11,6 +12,7 @@ export class UserService {
     constructor(
         @InjectRepository(User)
         private readonly userRepository:Repository<User>,
+        private readonly jwtService:JwtService,
     ) {}
 
     //Crear un nuevo usuario
@@ -136,7 +138,17 @@ export class UserService {
                 throw new BadRequestException("Usuario y/o contraseña incorrectas")
             }
 
-            return {message:"Ingreso exitoso. Bienvenido", name:loggingData.name +" "+loggingData.lastname, isMatch}
+            
+            //Creación de JWT para vigencia del acceso
+            const payload ={sub: userLog.id,}
+
+            const Token = await this.jwtService.signAsync(payload, {expiresIn:'30min'});
+        
+            return {
+                message:"Ingreso exitoso. Bienvenido", name:userLog.name +" "+userLog.lastname, 
+                isMatch, 
+                acess_token:Token
+            }
     }  
 
     //Eliminar usuario
