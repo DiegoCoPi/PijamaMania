@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Injectable, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Injectable, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
 import { ProductService } from "src/products/products.service";
 import { UserService } from "./users.service";
 import { User } from "src/entities/users.entity";
@@ -7,7 +7,7 @@ import { User } from "src/entities/users.entity";
 export class UserController{
 
     constructor(
-        private readonly userService:UserService
+        private readonly userService:UserService,
     ){}
 
     //Cración de ususario
@@ -23,10 +23,7 @@ export class UserController{
     //Ingreso de credenciales
     @Post(':login')
     async insideUser(@Body() loggingData:Partial<User>){
-        await this.userService.loggingUser(loggingData)
-        return{
-            message: "Ingreso exitoso",
-        }
+        return await this.userService.loggingUser(loggingData)
     }
 
 
@@ -51,8 +48,8 @@ export class UserController{
 
     //Eliminación de ususarios
     @Delete(':id')
-    async lessUser(@Param("id") id:number){
-        return await this.userService.deleteUser
+    async lessUser(@Param('id') id:number){
+        return await this.userService.deleteUser(id)
     }
 
 }
