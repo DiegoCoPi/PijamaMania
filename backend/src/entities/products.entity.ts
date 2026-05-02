@@ -1,5 +1,7 @@
 import { Category, Type } from "src/enum/product.enum";
 import { Column, Entity, PrimaryColumn } from "typeorm";
+import { OneToMany } from "typeorm/browser";
+import { Order } from "./orders.entity";
 
 
 @Entity('products')
@@ -22,5 +24,10 @@ export class Product{
 
     @Column({type:'varchar', length:2})
     stock!:number
+
+    @Column()
+    @OneToMany(()=>Order, order=>order.product)
+    order!:Order[]
+
 
 }
